@@ -1,0 +1,57 @@
+select * from games;
+
+copy public."games" from 'C:\download\course softwares\DATASETS\vgsales.csv' delimiter ',' csv header;
+
+select * from games where "Genre" in('Sports','Racing');
+select * from games where "Rank" between 1 and 100;
+select * from games where "Rank" not between 1 and 100;
+select * from games where "Name" like 'S%';
+select * from games where "Name" like '%Black%';
+select * from games where "Name" like '_____';
+
+select distinct "Genre" from games where "Genre" not like 'S%'; 
+select * from games where "Name" like 'P\%';
+select * from games where "Platform" = 'PC' order by "Rank";
+select * from games where "Platform" = 'PC' order by "Rank" desc;
+select * from games order by "Genre" asc ,"Name" desc;
+select * from games order by 2 asc;
+select * from games order by "Year" desc;
+select * from games where "Year">'2010' order by "Year" desc limit 10;
+select * from games where "Year">'2010' order by "Year" asc limit 20;
+
+select "Rank" as "Rank_no", "Name" as "Game_name" ,"Year" as "Release_Year" from games;
+select count(*) from games;
+select count("Name") as "No_of_Games",count(distinct "Platform") as  "No_of_Platforms" from games where "Name"='Call of Duty 3';
+select sum("Global_Sales") as "Total_Global_Sales" from games;
+select sum("NA_Sales") as "Total_NA_Sales" from games where "Platform"='PS3';
+select avg("Global_Sales") as "Average_Global_Sales" from games;
+
+select min("Global_Sales") as "Min_Sales" from games where "Year" between '2000' and '2010';
+select max("Global_Sales") as "Max_Sales" from games where "Year" between '2000' and '2010';
+
+select * from games;
+select "Publisher",count("Rank") as "Games_Count" from games group by "Publisher";
+select "Year",sum("EU_Sales") as "Total_EU_Sales" from games group by "Year" order by "Total_EU_Sales" desc;
+select "Platform",min("Global_Sales")as "Min_Sales",max("Global_Sales")as "Max_Sales",sum("Global_Sales") as "Total_Global_Sales" from games group by "Platform";
+select "Platform",count("Rank") as "Games_Count" from games group by "Platform" having count("Rank")>200;
+
+select * ,case when "Year"<'2000' then '20th Century' else '21st Century' end as "Year_Category" from games;
+select "Name","Platform",replace("Platform",'X360','Xbox 360') as "New_Platform_Name" from games;
+select "Platform","Name",substring("Platform" for 2) as "Platform_Group" from games where substring("Platform" for 2) = 'PS';
+select "Platform",string_agg("Publisher",', ')from games group by "Platform" order by "Platform";
+
+select * from games where "Name" like 'Su%';
+select * from games where "Name" like '%ty';
+select "Name" from games where "Name" not like'Su%';
+
+select * from games where "Name" ~* '^a+[a-z\s]+$';
+select * from games where "Name" ~* '^(a|b|c|d)+[a-z\s]+$';
+select * from games where "Name" ~* '^(a|b|c|d)[a-z]{3}\s[a-z]{4}';
+
+select "JP_Sales" ,'Total JP Sales is'||to_char("JP_Sales",' $99.99') as message from games;
+
+explain select * from games;
+explain select distinct * from games;
+
+create schema test;
+create table test.games as select * from games;
