@@ -1,0 +1,57 @@
+select * from netflix;
+
+copy public."netflix" from 'C:\download\course softwares\DATASETS\Netflix.csv' delimiter ',' csv header encoding 'windows-1251';
+
+select * from netflix where "Genres" in('Documentaries','Thrillers');
+select * from netflix where "S.No" between 1 and 100;
+select * from netflix where "S.No" not between 1 and 100;
+select * from netflix where "Title" like 'P%';
+select * from netflix where "Title" like '%the%';
+select * from netflix where "Title" like '_____ %';
+
+select distinct "Genres" from netflix where "Genres" not like 'T%';
+select * from netflix where "Series" = 'PG-13' order by "S.No";
+select * from netflix where "Series" = 'PG-13' order by "S.No" desc;
+select * from netflix order by "Genres" asc , "Title" desc;
+select * from netflix order by 2 asc;
+select * from netflix order by "Year" desc;
+select * from netflix where "Year">'2006' order by "Year" desc limit 10;
+select * from netflix where "Year">'2006' order by "Year" asc limit 20;
+
+select "S.No" as "Rank","Title" as "Name","Year" as "Release_Year" from netflix; 
+select count(*)from netflix;
+select count("Title") as "No_of_Titles",count(distinct "Series") as "N0_of_Series" from netflix where "Title"='Delhi Crime';
+select sum("Rating") as "Total_Ratings" from netflix where "Series"='TV-MA';
+select avg("Rating") as "Average_Ratings" from netflix where "Series"='R';
+
+select min("Rating") as "Min_Ratings" from netflix where "Year" between '2000' and '2010';
+select max("Rating") as "Max_Ratings" from netflix where "Year" between '2000' and '2010';
+
+select * from netflix;
+select "Director",count("S.No") as "No_of_Titles" from netflix group by "Director";
+select "Year",sum("Rating") as "Total_Ratings" from netflix group by "Year" order by "Total_Ratings" desc;
+select "Genres",min("Rating")as "Min_Ratings", max("Rating") as "Max_Ratings", sum("Rating") as "Total_Ratings" 
+from netflix group by "Genres" order by "Total_Ratings";
+
+select "Genres",count("S.No") as "Title_count" from netflix group by "Genres" having count("S.No")>100;
+select * ,case when ("Duration(in Minutes)")<180 then '2 Hr Movie' when ("Duration(in Minutes)") between 180 and 240 then '3 Hr Movie'
+else 'Seasons' end as "Title_Duration" from netflix;
+
+select "Title","Production Country", replace("Production Country",'Australia','AUS') as "New_Production_Country" from netflix;
+select "Series","Title",substring("Series" for 2 ) as "Series_group" from netflix where substring("Series" for 2 )='PG';
+select "Genres",string_agg("Director",' ,') from netflix group by "Genres" order by "Genres";
+
+select * from netflix where "Title" like 'Po%';
+select * from netflix where "Title" like '%ot';
+select "Title" from netflix where "Title" not like 'Po%';
+
+select * from netflix where "Title" ~* '^a+[a-z\s]+$';
+select * from netflix where "Title" ~* '^(a|b|c|d)+[a-z\s]+$';
+select * from netflix where "Title" ~* '^(a|b|c|d)[a-z]{3}\s[a-z]{4}';
+
+select "Rating",'Total Ratings is '||to_char("Rating",'9.99') as message from netflix;
+explain select * from netflix;
+explain select distinct * from netflix; 
+
+create schema test;
+create table test.netflix as select * from netflix;
