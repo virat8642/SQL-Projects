@@ -1,0 +1,80 @@
+select * from "NBA Players";
+
+copy public."NBA Players" from 'C:\download\course softwares\DATASETS\nba2k-1.csv' delimiter ',' csv header encoding 'windows-1251';
+
+select * from "NBA Players" where "Team" in ('Los Angeles Lakers','Atlanta Hawks');
+select * from "NBA Players" where "Rating" between 60 and 70;
+select * from "NBA Players" where "Rating" not between 60 and 70;
+select * from "NBA Players" where "College" like 'F%';
+select * from "NBA Players" where "College" like '%te';
+select * from "NBA Players" where "College" like '_____ %';
+
+select distinct "Team" from "NBA Players" where "Team" not like 'K%';
+select * from "NBA Players" where "Country"='Greece' order by "Team";
+select * from "NBA Players" where "Country"='Greece' order by "Team" desc;
+select * from "NBA Players" order by "Country" asc , "Team" desc;
+select * from "NBA Players" order by 2 asc;
+select * from "NBA Players" order by "Height" desc;
+select * from "NBA Players" where "Weight">200 order by "Weight" desc limit 50;
+select * from "NBA Players" where "Weight">220 order by "Weight" asc limit 30;
+
+select "Rating" as "Player Rating","Team" as "Player Team","Position" as "Player Position" from "NBA Players";
+select count(*) from "NBA Players";
+select count("Name") as "No_of_Players",count("Team") as "No_of_Teams" from "NBA Players" where "Team"='Chicago Bulls';
+select sum("Draft Peak") as "Total Draft Peak" from "NBA Players" where "Team"='Atlanta Hawks';
+select avg("Draft Peak") as "Average Draft Peak" from "NBA Players" where "Team"='Atlanta Hawks';
+select min("Rating") as "Min_Rating" from "NBA Players" where "Height" between 150 and 200;
+select max("Rating") as "Min_Rating" from "NBA Players" where "Height" between 150 and 200;
+
+select * from "NBA Players";
+select "Country",count("Team") as "No_of_Teams" from "NBA Players" group by "Country";
+select "Team",sum("Draft Peak") as "Total Draft Peak" from "NBA Players" group by "Team" order by "Total Draft Peak";
+select "Team",min("Draft Peak") as "Min Draft Peak",max("Draft Peak") as "Max Draft Peak",sum("Draft Peak") as "Total Draft Peak"
+from "NBA Players" group by "Team" order by "Total Draft Peak";
+select "Country",count("Team") as "Team_Count" from "NBA Players" group by "Country" having count("Team")>10;
+
+select *, case when "Rating"<70 then 'Low Rating Players' when "Rating" between 70 and 90 then 'Mid Rating Players' 
+else 'High Rating Players' end as "Ratings Category" from "NBA Players"; 
+select "Team","Country",replace("Country",'USA','United States') as "New_Country" from "NBA Players";
+select "Team","Country",substring("Team" for 2) as "Team Group" from "NBA Players" where substring("Team" for 2)='Lo';
+select "Team",string_agg("Name",', ') from "NBA Players" group by "Team" order by "Team";
+
+select * from "NBA Players" where "Team" like 'De%';
+select * from "NBA Players" where "Team" like '%es';
+select "Team" from "NBA Players" where "Team" not like '%rs';
+
+select * from "NBA Players" where "Team" ~* '^a+[a-z\s]+$';
+select * from "NBA Players" where "Team" ~* '^(a|b|c|d)+[a-z\s]+$';
+select * from "NBA Players" where "Name" ~* '^(a|b|c|d)[a-z]{3}\s[a-z]{5}';
+
+select "Rating",'Total Rating is'||to_char("Rating",'999') as message from "NBA Players";
+
+explain select * from "NBA Players";
+explain select distinct * from "NBA Players";
+
+create schema test;
+create table test."NBA players" as select * from "NBA Players";
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+ 
+
+
+
+
+
+
+
+
+

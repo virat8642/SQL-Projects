@@ -1,0 +1,71 @@
+select * from "IPL players";
+
+copy public."IPL players" from 'C:\download\course softwares\DATASETS\IPLPlayerAuctionData.csv' delimiter ',' csv header;
+
+select * from "IPL players" where "Role" in('Bastman','Bowler');
+select * from "IPL players" where "Amount" between 1000000 and 20000000;
+select * from "IPL players" where "Amount" not between 1000000 and 20000000;
+select * from "IPL players" where "Team" like 'De%';
+select * from "IPL players" where "Team" not like '%ns';
+select * from "IPL players" where "Team" like '_____ %';
+
+select distinct "Team" from "IPL players" where "Team" not like 'Ro%';
+select * from "IPL players" where "Team" = 'Sunrisers Hyderabad' order by "Role";
+select * from "IPL players" where "Team" = 'Sunrisers Hyderabad' order by "Role" desc;
+select * from "IPL players" order by "Player" asc , "Team" desc;
+select * from "IPL players" order by 3 asc;
+select * from "IPL players" order by "Amount" desc;
+select * from "IPL players" where "Year">2015 order by "Year" desc limit 50;
+select * from "IPL players" where "Year">2015 order by "Year" asc limit 30;
+ 
+select "Player" as "Player Name","Role" as "Player Role","Team" as "Player Team" from "IPL players";
+select count(*) from "IPL players";
+select count("Team") as "No_of_Teams",count("Player") as "No_of_Players" from "IPL players" where "Team" ='Gujarat Lions';
+select sum("Amount") as "Total Players Amount" from "IPL players" where "Team"='Kolkata Knight Riders';
+select avg("Amount") as "Avg Amount" from "IPL players" where "Team"='Kolkata Knight Riders';
+
+select * from "IPL players";
+select "Player", count("Team") as "No_of_Teams_Played" from "IPL players" group by "Player";
+select "Team",sum("Amount") as "Total Players Amount" from "IPL players" group by "Team" order by "Total Players Amount" desc;
+select "Team",min("Amount") as "Player_Min_Amount", max("Amount") as "Player_Max_Amount",sum("Amount") as "Total Players Amount"
+from "IPL players" group by "Team" order by "Total Players Amount";
+select "Team",count("Year") as "Year_count" from "IPL players" group by "Team" having count("Year")>3;
+
+select *, case when "Amount"<10000000 then 'Low Paid Players' when "Amount" between 10000000 and 100000000 then 'Mid Paid Players'
+else 'High Paid Players' end as "Player Amount" from "IPL players";
+select "Player","Team", replace("Team",'Mumbai','MUM') as "New_Team_Name" from "IPL players";
+select "Team","Player",substring("Team" for 2) as "Team_Group" from "IPL players" where substring("Team" for 2)='Su'; 
+select "Team",string_agg("Player",', ') from "IPL players" group by "Team" order by "Team";
+
+select * from "IPL players" where "Team" like 'Ch%';
+select * from "IPL players" where "Team" like '%ls';
+select "Team" from "IPL players" where "Team" not like 'Ro%';
+
+select * from "IPL players" where "Player" ~* '^a+[a-z\s]+$';
+select * from "IPL players" where "Team" ~* '^(a|b|c|d)+[a-z\s]+$';
+select * from "IPL players" where "Player" ~* '^(a|b|c|d)[a-z]{3}\s[a-z]{4}';
+
+select "Amount",'Total Amount is'||to_char("Amount",'9999999999') as message from "IPL players";
+explain select * from "IPL players";
+explain select distinct * from "IPL players";
+
+create schema test;
+create table test."IPL players" as select * from "IPL players";
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
