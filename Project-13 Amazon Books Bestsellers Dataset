@@ -1,0 +1,79 @@
+select * from books;
+select * from genre;
+
+copy public.books from 'C:\download\course softwares\DATASETS\amazon books\books.csv' delimiter ',' csv header;
+copy public.genre from 'C:\download\course softwares\DATASETS\amazon books\genre.csv' delimiter ',' csv header;
+
+select * from books where "Name" in ('Goodnight Moon','The Mueller Report');
+select * from books where "User Rating" between 2 and 5;
+select * from books where "User Rating" not between 2 and 5;
+select * from books where "Reviews" between 1000 and 5000;
+select * from books where "Name" like 'R%';
+select * from books where "Name" like '%es%';
+select * from books where "Name" like '_____ %';
+select distinct "Name" from books where "Name" not like 'K%';
+
+select * from books where "Author"='Stephen King' order by "Name";
+select * from books where "Author"='Stephen King' order by "Name" desc;
+select * from books order by "Author" asc , "Name" desc;
+select * from books order by 2 asc;
+select * from books order by "Reviews" desc;
+select * from books where "Reviews">2000 order by "Reviews" desc limit 10;
+select * from books where "Reviews">2000 order by "Reviews" asc limit 20;
+
+select "Name" as "Book Name","Author" as "Author Name","User Rating" as "Rating" from books;
+select count(*) from books;
+select count("User Rating") as "User Rating",count("Reviews") as "Total Reviews" from books where "Author"='Lubna Kaur';
+select sum("Reviews") as "Total Reviews" from books;
+select sum("Reviews") as "Reviews" from books where "Name"='The Alchemist';
+select avg("Reviews") as "Average Reviews" from books;
+
+select min("User Rating") as "Min User Rating" from books where "Author"='Paulo Coelho';
+select max("User Rating") as "Max User Rating" from books where "Author"='Paulo Coelho';
+select "Author",count("Name") as "Total Books" from books group by "Author";
+select "Author",sum("Reviews") as "Total Reviews" from books group by "Author" order by "Total Reviews" desc;
+select "Author",min("Reviews") as "Min Reviews",max("Reviews") as "Max Reviews",sum("Reviews") as "Total Reviews" from books 
+group by "Author" order by "Total Reviews";
+select "Author",count("Name") as "No of Books" from books group by "Author" having count("Name")>1;
+
+select * from books;
+select * from genre;
+
+select a."Name",a."Author",a."User Rating",a."Reviews",b."Genre"
+from books as a inner join genre as b on a."Name"=b."Name" order by "Name";
+
+select a."Name",a."Author",a."User Rating",a."Reviews",b."Genre"
+from books as a left join genre as b on a."Name"=b."Name" order by "Name";
+
+select a."Name",a."Author",a."User Rating",a."Reviews",b."Genre"
+from books as a right join genre as b on a."Name"=b."Name" order by "Name";
+
+select a."Name",a."Author",a."User Rating",a."Reviews",b."Genre"
+from books as a full join genre as b on a."Name"=b."Name" order by a."Name",b."Name";
+
+select "Name" from books except select "Name" from genre order by "Name";
+select "Name" from books union select "Name" from genre order by "Name";
+select * from genre where "Name" in (select "Name" from books where "Autohr"='JJ Smith');
+
+select a."Name",a."Genre" from genre as a left join
+(select "Name",sum("Reviews") as "Total Reviews" from books group by "Name") as b
+on a."Name"=b."Name";
+
+select "Name","Reviews",(select "Name" from genre where books."Name"=genre."Name") from books;
+select "Name", length("Name") as characters from books;
+select "Name"||'-'||"Price" as "Book Price" from books;
+
+select "Author","Name",substring("Name" for 2) as "Name Group" from books
+where substring("Name" for 2)='Th';
+select "Name",string_agg("Author"', ') from books group by "Name" order by "Name";
+
+select * from books where "Name" ~* '^a+[a-z\s]+$';
+select * from books where "Name" ~* '^(a|b|c|d)+[a-z\s]+$';
+select * from books where "Name" ~* '^(a|b|c|d)[a-z]{5}\s[a-z]{7}';
+
+select "Total Reviews",'Total Reviews are '||to_char("Total Reviews",'9999999') as message from books;
+explain select * from books;
+explain select distinct * from books;
+
+create schema test;
+create table test.books as select * from books;
