@@ -1,0 +1,79 @@
+select * from apps;
+select * from download;
+
+copy public.apps from 'C:\download\course softwares\DATASETS\Google playstore apps\apps.csv' delimiter ',' csv header;
+copy public.download from 'C:\download\course softwares\DATASETS\Google playstore apps\download.csv' delimiter ',' csv header;
+
+select * from apps where "Developer" in ('Amazon Mobile LLC','Google LLC');
+select * from apps where "Rating" between 1 and 4;
+select * from apps where "Rating" not between 1 and 4;
+select * from apps where "Rank" between 1 and 100;
+select * from apps where "Name" like 'R%';
+select * from apps where "Name" like '%op%';
+select * from apps where "Name" like '_____ %';
+select distinct "Name" from apps where "Name" not like 'P%';
+
+select * from apps where "Developer"='Instagram' order by "Name";
+select * from apps where "Developer"='InShot Inc.' order by "Name" desc;
+select * from apps order by "Developer" asc , "Name" desc;
+select * from apps order by 2 asc;
+select * from apps order by "Size" desc;
+select * from apps where "Rank">100 order by "Rank" desc limit 10;
+select * from apps where "Rank">100 order by "Rank" asc limit 20;
+
+select "Name" as "App Name","Developer" as "Developer Name","Size" as "App Size" from apps;
+select count(*) from apps;
+select count("Name") as "No of Apps",count("Reviews") as "Total Reviews" from apps where "Developer"='Microsoft Corporation';
+select sum("Reviews") as "Total Reviews" from apps;
+select sum("Reviews") as "Total Reviews" from apps where "Name"='Facebook';
+select avg("Reviews") as "Average Reviews" from apps;
+
+select min("Rating") as "Min Rating" from apps where "Developer"='ShareChat';
+select max("Rating") as "Max Rating" from apps where "Developer"='ShareChat';
+select "Developer",count("Name") as "Name" from apps group by "Developer";
+select "Developer",sum("Rating") as "Total Rating" from apps group by "Developer" order by "Total Rating" desc;
+select "Developer",min("Rating") as "Min Rating",max("Rating") as "Max Rating",sum("Rating") as "Total Rating" from apps 
+group by "Developer" order by "Total Rating";
+select "Developer",count("Name") as "No of Apps" from apps group by "Developer" having count("Name")>1;
+
+select * from apps;
+select * from download;
+
+select a."Name",a."Developer",a."Size",a."Rating",b."Downloads",b."Rated for"
+from apps as a inner join download as b on a."Name"=b."Name" order by "Name";
+
+select a."Name",a."Developer",a."Size",a."Rating",b."Downloads",b."Rated for"
+from apps as a left join download as b on a."Name"=b."Name" order by "Name";
+
+select a."Name",a."Developer",a."Size",a."Rating",b."Downloads",b."Rated for"
+from apps as a right join download as b on a."Name"=b."Name" order by "Name";
+
+select a."Name",a."Developer",a."Size",a."Rating",b."Downloads",b."Rated for"
+from apps as a full join download as b on a."Name"=b."Name" order by a."Name",b."Name";
+
+select "Name" from apps except select "Name" from download order by "Name";
+select "Name" from apps union select "Name" from download order by "Name";
+select * from status where "Employee Name" in (select "Employee Name" from payroll where "Job Title"='Roofer');
+
+select a."Name",a."Downloads",a."Rated for" from download as a 
+left join (select "Name",sum("Rating") as "Total Rating" from apps group by "Name") as b
+on a."Name"=b."Name" order by b."Name";
+
+select "Name","Rating",(select "Name" from download where apps."Name"=download."Name") from apps;
+select "Name", length("Name") as characters from apps;
+select "Name"||', '||"Size" as "App Details" from apps;
+
+select "Developer","Name",substring("Name" for 2) as "App Group" from apps
+where substring("Name" for 2)='Sh';
+select "Name",string_agg("Developer"', ') from apps group by "Name" order by "Name";
+
+select * from apps where "Name" ~* '^a+[a-z\s]+$';
+select * from apps where "Name" ~* '^(a|b|c|d)+[a-z\s]+$';
+select * from apps where "Name" ~* '^(a|b|c|d)[a-z]{5}\s[a-z]{7}';
+
+select "Rating",'Total Rating is'||to_char("Rating",'9999999') as message from apps;
+explain select * from apps;
+explain select distinct * from apps;
+
+create schema test;
+create table test.apps as select * from apps;
