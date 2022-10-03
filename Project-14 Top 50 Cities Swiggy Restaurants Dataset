@@ -1,0 +1,79 @@
+select * from swiggy;
+select * from address;
+
+copy public.swiggy from 'C:\download\course softwares\DATASETS\swiggy 50\Swiggy 50.csv' delimiter ',' csv header;
+copy public.address from 'C:\download\course softwares\DATASETS\swiggy 50\address.csv' delimiter ',' csv header;
+
+select * from swiggy where "Category" in ('American','Chinese');
+select * from swiggy where "Rating" between 1 and 3;
+select * from swiggy where "Rating" not between 1 and 3;
+select * from swiggy where "Cost for two" between 100 and 500;
+select * from swiggy where "Restaurant Name" like 'K%';
+select * from swiggy where "Restaurant Name" like '%so%';
+select * from swiggy where "Restaurant Name" like '____ %';
+select distinct "Restaurant Name" from swiggy where "Restaurant Name" not like 'K%';
+
+select * from swiggy where "Cateogry"='Indian' order by "Restaurant Name";
+select * from swiggy where "Category"='Indian' order by "Restaurant Name" desc;
+select * from swiggy order by "Category" asc , "Restaurant Name" desc;
+select * from swiggy order by 2 asc;
+select * from swiggy order by "Cost for Two" desc;
+select * from swiggy where "Cost for Two">500 order by "Cost for Two" desc limit 10;
+select * from swiggy where "Cost for Two">500 order by "Cost for Two" asc limit 20;
+
+select "Restaurant Name" as "Name","Category" as "Cuisine","Cost for Two" as "Price" from swiggy;
+select count(*) from swiggy;
+select count("Restaurant Name") as "No of Restaurants",count("City") as "No of City" from swiggy where "Category"='South Indian';
+select sum("Rating") as "Total Rating" from swiggy;
+select sum("Rating") as "Total Rating" from swiggy where "Category"='Sweets';
+select avg("Rating") as "Rating" from swiggy;
+
+select min("Cost for Two") as "Min Price" from swiggy where "Category"='Street Food';
+select max("Cost for Two") as "Max Price" from swiggy where "Category"='Street Food';
+select "Category",count("Restaurant Name") as "No of Restaurants" from swiggy group by "Category";
+select "Category",sum("Rating") as "Total Ratings" from swiggy group by "Category" order by "Total Ratings" desc;
+select "Category",min("Cost for Two") as "Min Price",max("Cost for Two") as "Max Price",sum("Cost for Two") as "Total Price" from swiggy 
+group by "Category" order by "Total Price";
+select "Category",count("Restaurant Name") as "No of Restaurants" from swiggy group by "Category" having count("Restaurant Name")>1;
+
+select * from swiggy;
+select * from address;
+
+select a."Restaurant Name",a."Category",a."Rating",a."Cost for Two",b."Area",b."Locality"
+from swiggy as a inner join address as b on a."Restaurant Name"=b."Restaurant Name" order by "Restaurant Name";
+
+select a."Restaurant Name",a."Category",a."Rating",a."Cost for Two",b."Area",b."Locality"
+from swiggy as a inner join address as b on a."Restaurant Name"=b."Restaurant Name" order by "Restaurant Name";
+
+select a."Restaurant Name",a."Category",a."Rating",a."Cost for Two",b."Area",b."Locality"
+from swiggy as a inner join address as b on a."Restaurant Name"=b."Restaurant Name" order by "Restaurant Name";
+
+select a."Restaurant Name",a."Category",a."Rating",a."Cost for Two",b."Area",b."Locality",b."Restaurant Name"
+from swiggy as a inner join address as b on a."Restaurant Name"=b."Restaurant Name" order by a."Restaurant Name",b."Restaurant Name";
+
+select "Restaurant Name" from swiggy except select "Restaurant Name" from status order by "Restaurant Name";
+select "Restaurant Name" from swiggy union select "Restaurant Name" from status order by "Restaurant Name";
+select * from address where "Restaurant Name" in (select "Restaurant" Name" from swiggy where "Category"='American');
+
+select a."Restaurant Name",a."Rating",a."Category" from address as a left join
+(select "Restaurant Name",sum("Rating") as "Total Rating" from swiggy group by "Restaurant Name") as b
+on a."Restaurant Name"=b."Restaurant Name";
+
+select "Restaurant Name","Rating",(select "Address" from address where swiggy."Restaurant Name"=address."Restaurant Name") from swiggy order by "Restaurant Name";
+select "Restaurant Name",length("Restaurant Name") as characters from swiggy;
+select "Restaurant Name"||' - '||"Category" as "Restaurant Details" from swiggy;
+select "Category","Restaurant Name",substring("Restaurant Name" for 2) as "Restaurant Group" from swiggy
+where substring("Restaurant Name" for 2)='Ca'; 
+
+select * from swiggy;
+select "Restaurant Name",string_agg("Category",', ') from swiggy group by "Restaurant Name" order by "Restaurant Name";
+
+select * from swiggy where "Restaurant Name" ~* '^a+[a-z\s]+$';
+select * from swiggy where "Restaurant Name" ~* '^(a|b|c|d)+[a-z\s]+$';
+select * from swiggy where "Restaurant Name" ~* '^(a|b|c|d)[a-z]{5}\s[a-z]{7}';
+
+select "Restaurant Name","Rating",'Total Rating is'||to_char("Rating",'99.99') as message from swiggy;
+explain select * from swiggy;
+explain select distinct * from swiggy;
+create schema test;
+create table test.swiggy as select * from swiggy;
