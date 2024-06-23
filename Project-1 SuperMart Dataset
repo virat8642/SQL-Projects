@@ -70,7 +70,7 @@ select count (*) from sales;
 
 select count(order_line)as "no of product ordered" , count(distinct order_id) as "no of orders" from sales where customer_id = 'CG-12520';
 
--- Total profit from sales table--
+-- Total profit from sales table --
 
 select sum(profit) as "total profit" from sales;
 
