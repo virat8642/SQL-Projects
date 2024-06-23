@@ -2,23 +2,23 @@ select * from customer;
 select * from sales;
 select * from product;
 
--- Total numbers of customers from Philadelphia and Settle cities from customer table--
+-- Total numbers of customers from Philadelphia and Settle cities from customer table --
 
 select * from customer where city in ('Philadelphia','Seattle');
 
--- Total numbers of customers whose age is between 20 to 30 from customer table--
+-- Total numbers of customers whose age is between 20 to 30 from customer table --
 
 select * from customer where age between 20 and 30;
 
--- Total numbers of customers whose age is not between age 20 to 30 from customer table--
+-- Total numbers of customers whose age is not between 20 to 30 from customer table --
 
 select * from customer where age not between 20 and 30;
 
--- Total numbers of sales from 2015 to 2016 from sales table--
+-- Total numbers of sales from 2015 to 2016 from sales table --
 
 select * from sales where ship_date between '2015-04-01' and '2016-04-01';
 
--- Total numbers of customers whose name starts from J from customer table--
+-- Total numbers of customers whose name starts from J from customer table --
 
 select * from customer where customer_name like'J%';
 
@@ -26,19 +26,19 @@ select * from customer where customer_name like'J%';
 
 select * from customer where customer_name like '%Nelson%';
 
--- Total numbers of customers whose first name contain only 4 characters from customer table--
+-- Total numbers of customers whose first name contain only 4 characters from customer table --
 
 select * from customer where customer_name like'____ %';
 
--- Total numbers of customers from California state in ascending order from customer table--
+-- Total numbers of customers from California state in ascending order from customer table --
 
 select * from customer where state = 'California' order by customer_name;
 
--- Total numbers of customers from California state in descending order from customer table--
+-- Total numbers of customers from California state in descending order from customer table --
 
 select * from customer where state = 'California' order by customer_name desc from customer table;
 
--- Total numbers of customers from all cities in ascending order and customer name in descending order from customer table--
+-- Total numbers of customers from all cities in ascending order and customer name in descending order from customer table --
 
 select * from customer order by city asc , customer_name desc;
 
@@ -46,27 +46,27 @@ select * from customer order by city asc , customer_name desc;
 
 select * from customer order by 2 asc from customer table;
 
--- Total numbers of customers by age in descending order--
+-- Total numbers of customers by age in descending order --
 
 select * from customer order by age desc from customer table;
 
--- Top 8 customers whose age is greater than 25 in descending order from customer table--
+-- Top 8 customers whose age is greater than 25 in descending order from customer table --
 
 select * from customer where age>25 order by age desc limit 8;
 
--- Top 20 customers whose age is greater than 25 in ascending order from customer table--
+-- Top 20 customers whose age is greater than 25 in ascending order from customer table --
 
 select * from customer where age>25 order by age asc limit 20;
 
--- Renaming the column using AS keyword--
+-- Renaming the column using AS keyword --
 
 select customer_id as "serial no" ,customer_name as name , age as customer_age from customer;
 
--- Total count of sales from sales table--
+-- Total count of sales from sales table --
 
 select count (*) from sales;
 
--- Total number of products ordered and total number of unique orders from sales table for a particular customer ID from sales table--
+-- Total number of products ordered and total number of unique orders from sales table for a particular customer ID from sales table --
 
 select count(order_line)as "no of product ordered" , count(distinct order_id) as "no of orders" from sales where customer_id = 'CG-12520';
 
@@ -74,42 +74,51 @@ select count(order_line)as "no of product ordered" , count(distinct order_id) as
 
 select sum(profit) as "total profit" from sales;
 
--- Total quantity from sales table for a particular customer ID from sales table--
+-- Total quantity for a particular customer ID from sales table --
 
 select sum(quantity) as "total quantity" from sales where product_id = 'FUR-TA-10000577';
 
--- Average customer age from customer table--
+-- Average customer age from customer table --
 
 select avg(age) as "average customer age" from customer;
 
--- Minimum sales from 01/06/2015 to 30/06/2015 from sales table--
+-- Minimum sales from 01/06/2015 to 30/06/2015 from sales table --
 
 select min(sales) as "min sales" from sales where order_date between '2015-06-01' and '2015-06-30';
 
--- Maximum sales from 01/06/2015 to 30/06/2015 from sales table--
+-- Maximum sales from 01/06/2015 to 30/06/2015 from sales table --
 
 select max(sales) as "max sales" from sales where order_date between '2015-06-01' and '2015-06-30';
 
 select * from customer;
 
--- Total count of customers in each region from customer table--
+-- Total count of customers in each region from customer table --
 
 select region,count(customer_id) as customer_count from customer group by region;
 
--- Total number of products sold grouped by each product ID in descending order by quantity sold from sales table--
+-- Total number of products sold group by each product ID in descending order by quantity sold from sales table --
 
 select product_id,sum(quantity) as quantity_sold from sales group by product_id order by quantity_sold desc;
 
--- Total number of products sold grouped by each product ID in descending order by quantity sold from sales table--
+-- Minimum sales, Maximium sales and Total sales group by customer ID order by total sales from sales table --
 
 select customer_id, min(sales) as min_sales,max(sales) as max_sales,sum(sales) as total_sales from sales group by customer_id order by total_sales;
+
+-- Total number of customer in each region where number of customers is greater than 200 from customer table --
+
 select region,count(customer_id) as customer_count from customer group by region having count(customer_id)>200;
+
+-- Total customers according to age and classifying them in age category from customer table --
 
 select * , case when age<30 then 'young' when age>60 then'senior' else 'middle aged'
 end as age_category from customer;
 
+-- Creating tables --
+
 create table sales_2015 as select * from sales where ship_date between '2015-01-01'  and '2015-12-31';
 create table customer_20_60 as select * from customer where age between 20 and 60;
+
+-- Using JOINS --
 
 select a.order_line,a.product_id,a.customer_id,a.sales,b.customer_name,b.age
 from sales_2015 as a inner join customer_20_60 as b
