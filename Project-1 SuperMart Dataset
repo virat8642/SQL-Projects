@@ -2,22 +2,52 @@ select * from customer;
 select * from sales;
 select * from product;
 
-/* Total numbers of customer from Philadelphia and Settle /*
+-- Total numbers of customers from Philadelphia and Settle cities --
 
 select * from customer where city in ('Philadelphia','Seattle');
+
+-- Total numbers of customers whose age is between age 20 to 30 --
+
 select * from customer where age between 20 and 30;
+
+-- Total numbers of customers whose age is not between age 20 to 30 --
+
 select * from customer where age not between 20 and 30;
+
+-- Total numbers of sales from 2015 to 2016 --
+
 select * from sales where ship_date between '2015-04-01' and '2016-04-01';
 
+-- Total numbers of customers whose name starts from J --
+
 select * from customer where customer_name like'J%';
+
+-- Total numbers of customers whose name contain Nelson --
+
 select * from customer where customer_name like '%Nelson%';
+
+-- Total numbers of customers whose first name contain only 4 characters --
+
 select * from customer where customer_name like'____ %';
-select distinct city from customer where city not like 'S%';
+
+-- Total numbers of customers from California state in ascending order --
 
 select * from customer where state = 'California' order by customer_name;
+
+-- Total numbers of customers from California state in descending order --
+
 select * from customer where state = 'California' order by customer_name desc;
+
+-- Total numbers of customers from all cities in ascending order and customer name in descending order--
+
 select * from customer order by city asc , customer_name desc;
+
+-- Total numbers of customers in ascending order by column number 2--
+
 select * from customer order by 2 asc;
+
+-- Total numbers of customers by age in descending order--
+
 select * from customer order by age desc;
 select * from customer where age>25 order by age desc limit 8;
 select * from customer where age>25 order by age asc limit 20;
