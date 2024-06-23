@@ -2,6 +2,8 @@ select * from customer;
 select * from sales;
 select * from product;
 
+/* Total numbers of customer from Philadelphia and Settle /*
+
 select * from customer where city in ('Philadelphia','Seattle');
 select * from customer where age between 20 and 30;
 select * from customer where age not between 20 and 30;
