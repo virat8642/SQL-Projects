@@ -88,17 +88,30 @@ select max("Global_Sales") as "Max_Sales" from games where "Year" between '2000'
 
 select * from games;
 
--- Minimum Global Sales from 2000 to 2010 --
+-- Total number of games group by publisher --
 
 select "Publisher",count("Rank") as "Games_Count" from games group by "Publisher";
 
+-- Total EU Sales group by year order by Total EU Sales in descending order --
+
 select "Year",sum("EU_Sales") as "Total_EU_Sales" from games group by "Year" order by "Total_EU_Sales" desc;
+
+-- Minimum Global Sales, Maximum Global Sales and Total Global Sales group by Platform --
+
 select "Platform",min("Global_Sales")as "Min_Sales",max("Global_Sales")as "Max_Sales",sum("Global_Sales") as "Total_Global_Sales" from games group by "Platform";
+
+-- Total number of games group by platform having rank greater than 200 --
+
 select "Platform",count("Rank") as "Games_Count" from games group by "Platform" having count("Rank")>200;
 
+-- Categorizing the games by year --
+
 select * ,case when "Year"<'2000' then '20th Century' else '21st Century' end as "Year_Category" from games;
+
 select "Name","Platform",replace("Platform",'X360','Xbox 360') as "New_Platform_Name" from games;
+
 select "Platform","Name",substring("Platform" for 2) as "Platform_Group" from games where substring("Platform" for 2) = 'PS';
+
 select "Platform",string_agg("Publisher",', ')from games group by "Platform" order by "Platform";
 
 explain select * from games;
