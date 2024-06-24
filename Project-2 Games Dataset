@@ -54,14 +54,36 @@ select * from games where "Year">'2010' order by "Year" desc limit 10;
 
 select * from games where "Year">'2010' order by "Year" asc limit 20;
 
+--Renaming the column using AS keyword --
+
 select "Rank" as "Rank_no", "Name" as "Game_name" ,"Year" as "Release_Year" from games;
+
+-- Total count of games --
+
 select count(*) from games;
+
+-- Total number of games sold across total number of unique platforms of a particular game --
+
 select count("Name") as "No_of_Games",count(distinct "Platform") as  "No_of_Platforms" from games where "Name"='Call of Duty 3';
+
+-- Total Global Sales of games --
+
 select sum("Global_Sales") as "Total_Global_Sales" from games;
+
+-- Total NA Sales for PS3 platform --
+
 select sum("NA_Sales") as "Total_NA_Sales" from games where "Platform"='PS3';
+
+-- Average Global Sales of games --
+
 select avg("Global_Sales") as "Average_Global_Sales" from games;
 
+-- Minimum Global Sales from 2000 to 2010 --
+
 select min("Global_Sales") as "Min_Sales" from games where "Year" between '2000' and '2010';
+
+-- Maximum Global Sales from 2000 to 2010 --
+
 select max("Global_Sales") as "Max_Sales" from games where "Year" between '2000' and '2010';
 
 select * from games;
