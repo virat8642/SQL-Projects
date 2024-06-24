@@ -2,21 +2,56 @@ select * from games;
 
 copy public."games" from 'C:\download\course softwares\DATASETS\vgsales.csv' delimiter ',' csv header;
 
+-- Total number of games in Sports and Racing Genre --
+
 select * from games where "Genre" in('Sports','Racing');
+
+-- Total number of games from 1 to 100 rank --
+
 select * from games where "Rank" between 1 and 100;
+
+-- Total number of games where rank is not between 1 to 100 --
+
 select * from games where "Rank" not between 1 and 100;
+
+-- Total number of games whose Name starts with S --
+
 select * from games where "Name" like 'S%';
+
+-- Total number of games whose Name contain Black --
+
 select * from games where "Name" like '%Black%';
+
+-- Total number of games whose first name contain only 4 characters--
+
 select * from games where "Name" like '_____ %';
 
-select distinct "Genre" from games where "Genre" not like 'S%'; 
-select * from games where "Name" like 'P\%';
+-- Total number of games from PC order by Rank --
+
 select * from games where "Platform" = 'PC' order by "Rank";
+
+-- Total number of games from PC order by Rank in descending order --
+
 select * from games where "Platform" = 'PC' order by "Rank" desc;
+
+-- Total number of games order by Genre in ascending order and Name in descending order --
+
 select * from games order by "Genre" asc ,"Name" desc;
+
+-- Total number of games order by column name 2 in ascending order --
+
 select * from games order by 2 asc;
+
+-- Total number of games order by year in descending order  --
+
 select * from games order by "Year" desc;
+
+-- Top 10 games sold after 2010 in descending order --
+
 select * from games where "Year">'2010' order by "Year" desc limit 10;
+
+-- Top 20 games sold after 2010 in ascending order --
+
 select * from games where "Year">'2010' order by "Year" asc limit 20;
 
 select "Rank" as "Rank_no", "Name" as "Game_name" ,"Year" as "Release_Year" from games;
