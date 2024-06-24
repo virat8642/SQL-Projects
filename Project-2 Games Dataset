@@ -22,7 +22,7 @@ select * from games where "Name" like 'S%';
 
 select * from games where "Name" like '%Black%';
 
--- Total number of games whose first name contain only 4 characters--
+-- Total number of games whose first name contain only 4 characters --
 
 select * from games where "Name" like '_____ %';
 
@@ -42,7 +42,7 @@ select * from games order by "Genre" asc ,"Name" desc;
 
 select * from games order by 2 asc;
 
--- Total number of games order by year in descending order  --
+-- Total number of games order by year in descending order --
 
 select * from games order by "Year" desc;
 
@@ -107,6 +107,8 @@ select "Platform",count("Rank") as "Games_Count" from games group by "Platform" 
 -- Categorizing the games by year --
 
 select * ,case when "Year"<'2000' then '20th Century' else '21st Century' end as "Year_Category" from games;
+
+-- Renaming the Platform name --
 
 select "Name","Platform",replace("Platform",'X360','Xbox 360') as "New_Platform_Name" from games;
 
