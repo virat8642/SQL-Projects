@@ -30,7 +30,7 @@ select * from customer where customer_name like '%Nelson%';
 
 select * from customer where customer_name like'____ %';
 
--- Total numbers of customers from California state in ascending order from customer table --
+-- Total numbers of customers from California state from customer table --
 
 select * from customer where state = 'California' order by customer_name;
 
@@ -104,7 +104,7 @@ select product_id,sum(quantity) as quantity_sold from sales group by product_id 
 
 select customer_id, min(sales) as min_sales,max(sales) as max_sales,sum(sales) as total_sales from sales group by customer_id order by total_sales;
 
--- Total number of customer in each region where number of customers is greater than 200 from customer table --
+-- Total number of customers in each region where number of customers is greater than 200 from customer table --
 
 select region,count(customer_id) as customer_count from customer group by region having count(customer_id)>200;
 
