@@ -14,11 +14,11 @@ select * from games where "Rank" between 1 and 100;
 
 select * from games where "Rank" not between 1 and 100;
 
--- Total number of games whose Name starts with S --
+-- Total number of games whose name starts with S --
 
 select * from games where "Name" like 'S%';
 
--- Total number of games whose Name contain Black --
+-- Total number of games whose name contain Black --
 
 select * from games where "Name" like '%Black%';
 
