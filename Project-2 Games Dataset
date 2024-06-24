@@ -87,7 +87,11 @@ select min("Global_Sales") as "Min_Sales" from games where "Year" between '2000'
 select max("Global_Sales") as "Max_Sales" from games where "Year" between '2000' and '2010';
 
 select * from games;
+
+-- Minimum Global Sales from 2000 to 2010 --
+
 select "Publisher",count("Rank") as "Games_Count" from games group by "Publisher";
+
 select "Year",sum("EU_Sales") as "Total_EU_Sales" from games group by "Year" order by "Total_EU_Sales" desc;
 select "Platform",min("Global_Sales")as "Min_Sales",max("Global_Sales")as "Max_Sales",sum("Global_Sales") as "Total_Global_Sales" from games group by "Platform";
 select "Platform",count("Rank") as "Games_Count" from games group by "Platform" having count("Rank")>200;
@@ -96,16 +100,6 @@ select * ,case when "Year"<'2000' then '20th Century' else '21st Century' end as
 select "Name","Platform",replace("Platform",'X360','Xbox 360') as "New_Platform_Name" from games;
 select "Platform","Name",substring("Platform" for 2) as "Platform_Group" from games where substring("Platform" for 2) = 'PS';
 select "Platform",string_agg("Publisher",', ')from games group by "Platform" order by "Platform";
-
-select * from games where "Name" like 'Su%';
-select * from games where "Name" like '%ty';
-select "Name" from games where "Name" not like'Su%';
-
-select * from games where "Name" ~* '^a+[a-z\s]+$';
-select * from games where "Name" ~* '^(a|b|c|d)+[a-z\s]+$';
-select * from games where "Name" ~* '^(a|b|c|d)[a-z]{3}\s[a-z]{4}';
-
-select "JP_Sales" ,'Total JP Sales is'||to_char("JP_Sales",' $99.99') as message from games;
 
 explain select * from games;
 explain select distinct * from games;
