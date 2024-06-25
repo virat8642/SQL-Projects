@@ -118,19 +118,25 @@ end as age_category from customer;
 create table sales_2015 as select * from sales where ship_date between '2015-01-01'  and '2015-12-31';
 create table customer_20_60 as select * from customer where age between 20 and 60;
 
--- Using JOINS --
+-- Inner Join --
 
 select a.order_line,a.product_id,a.customer_id,a.sales,b.customer_name,b.age
 from sales_2015 as a inner join customer_20_60 as b
 on a.customer_id = b.customer_id order by customer_id;
 
+-- Left Join --
+
 select a.order_line, a.product_id, a.customer_id, a.sales, b.customer_name, b.age
 from sales_2015 as a left join customer_20_60 as b
 on a.customer_id = b.customer_id order by customer_id;
 
+-- Right Join --
+
 select a.order_line, a.product_id, a.customer_id, a.sales, b.customer_name, b.age
 from sales_2015 as a right join customer_20_60 as b
 on a.customer_id = b.customer_id order by customer_id;
+
+-- Full Join --
 
 select a.order_line, a.product_id, a.customer_id, a.sales, b.customer_name, b.age, b.customer_id
 from sales_2015 as a full join customer_20_60 as b
