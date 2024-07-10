@@ -26,23 +26,64 @@ select * from "Youtubers" where "Channel Name" like '%om';
 
 select * from "Youtubers" where "Channel Name" like '_____ %';
 
+-- Total number of youtube channels from Entertainment category order by channel name --
+
 select * from "Youtubers" where "Main Video Category" = 'Entertainment' order by "Channel Name";
+
+-- Total number of youtube channels from Entertainment category order by channel name in descending order --
+
 select * from "Youtubers" where "Main Video Category" = 'Entertainment' order by "Channel Name" desc;
+
+-- Total number of youtube channels order by category in ascending order and channel name in descending order --
+
 select * from "Youtubers" order by "Category" asc,"Channel Name" desc;
+
+-- Total number of youtube channels order by column name 2 in ascending order --
+
 select * from "Youtubers" order by 2 asc;
+
+-- Total number of youtube channels order by likes in descending order --
+
 select * from "Youtubers" order by "Likes" desc;
+
+-- Top 50 youtube channels where Boost Index is greater than 70 in descending order --
+
 select * from "Youtubers" where "Boost Index">70 order by "Boost Index" desc limit 50;
+
+-- Top 10 youtube channels where Boost Index is greater than 70 in ascending order --
+
 select * from "Youtubers" where "Boost Index">70 order by "Boost Index" asc limit 10;
 
+--Renaming the column using AS keyword --
+
 select "Channel Name" as "Name","Username" as "UName","Main topic" as "Topic" from "Youtubers";
+
+-- Total count of youtube channels --
+
 select count(*) from "Youtubers";
+
+-- Total number of youtube channels across total number of categories of a particular channel name --
+
 select count("Channel Name") as "No_of_Channels" ,count("Category") as "No_of_Category" from "Youtubers" where"Channel Name"='SET India';
+
+-- Total likes of youtube channels for Sports category --
+
 select sum("Likes") as "Total_Likes" from "Youtubers" where "Category"='Sports';
+
+-- Average likes of youtube channels for Sports category --
+
 select avg("Likes") as "Average_Likes" from "Youtubers" where "Category"='Sports';
+
+-- Minimum likes of youtube channels where Views between 10000000000 and 20000000000 --
+
 select min("Likes") as "Min_Likes" from "Youtubers" where "Views" between 10000000000 and 20000000000;
+
+-- Maximum likes of youtube channels where Views between 10000000000 and 20000000000 --
+
 select max("Likes") as "Max_Likes" from "Youtubers" where "Views" between 10000000000 and 20000000000;
 
 select * from "Youtubers";
+
 select "Username",  count("Channel Name") as "No_of_Channels" from "Youtubers" group by "Username";
 select "Country",sum("Likes")as "Total_Likes" from "Youtubers" group by "Country" order by "Total_Likes" desc;
 select "Category",min("Likes")as "Min_Likes",max("Likes")as "Max_Likes",sum("Likes") as "Total_Likes"
@@ -55,16 +96,8 @@ select "Channel Name","Country", replace("Country",'US','United States') as "New
 select "Category","Channel Name",substring("Category" for 2 ) as "Category_group" from "Youtubers" where substring("Category" for 2 )='Ga';
 select "Category",string_agg("Username",' ,') from "Youtubers"  group by "Category" order by "Category";
 
-select * from "Youtubers" where "Channel Name" like 'Sa%';
-select * from "Youtubers" where "Channel Name" like '%it';
-select "Channel Name" from "Youtubers" where "Channel Name" not like 'Sa%';
-
-select * from "Youtubers" where "Channel Name" ~* '^a+[a-z\s]+$';
-select * from "Youtubers" where "Channel Name" ~* '^(a|b|c|d)+[a-z\s]+$';
-select * from "Youtubers" where "Channel Name" ~* '^(a|b|c|d)[a-z]{3}\s[a-z]{4}';
-
-select "Likes",'Total Likes is '||to_char("Likes",'9999999999.999') as message from "Youtubers";
 explain select * from "Youtubers";
 explain select distinct * from "Youtubers"; 
+
 create schema test;
 create table test."Youtubers" as select * from "Youtubers";
