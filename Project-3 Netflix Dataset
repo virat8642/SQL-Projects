@@ -2,41 +2,68 @@ select * from netflix;
 
 copy public."netflix" from 'C:\download\course softwares\DATASETS\Netflix.csv' delimiter ',' csv header encoding 'windows-1251';
 
--- Total number of series in Documentaries and Thrillers Genre --
+-- Total number of titles in Documentaries and Thrillers Genre --
 
 select * from netflix where "Genres" in('Documentaries','Thrillers');
 
--- Total number of series from 1 to 100 --
+-- Total number of titles from 1 to 100 --
 
 select * from netflix where "S.No" between 1 and 100;
 
--- Total number of series where serial number is not between 1 to 100 --
+-- Total number of titles where serial number is not between 1 to 100 --
 
 select * from netflix where "S.No" not between 1 and 100;
 
--- Total number of series whose name starts with P --
+-- Total number of titles whose name starts with P --
 
 select * from netflix where "Title" like 'P%';
 
--- Total number of series whose name contain 'the' --
+-- Total number of titles whose name contain 'the' --
 
 select * from netflix where "Title" like '%the%';
 
--- Total number of series whose first name contain only 4 characters --
+-- Total number of titles whose first name contain only 4 characters --
 
 select * from netflix where "Title" like '_____ %';
 
-select distinct "Genres" from netflix where "Genres" not like 'T%';
+-- Total number of series from PG-13 order by serial number --
+
 select * from netflix where "Series" = 'PG-13' order by "S.No";
+
+-- Total number of series from PG-13 order by serial number in descending order --
+
 select * from netflix where "Series" = 'PG-13' order by "S.No" desc;
+
+-- Total number of titles order by Genre in ascending order and Title in descending order --
+
 select * from netflix order by "Genres" asc , "Title" desc;
+
+-- Total number of titles order by column name 2 in ascending order --
+
 select * from netflix order by 2 asc;
+
+-- Total number of titles order by year in descending order --
+
 select * from netflix order by "Year" desc;
+
+-- Top 10 titles after 2006 in descending order --
+
 select * from netflix where "Year">'2006' order by "Year" desc limit 10;
+
+-- Top 20 titles after 2010 in ascending order --
+
 select * from netflix where "Year">'2006' order by "Year" asc limit 20;
 
+--Renaming the column using AS keyword --
+
 select "S.No" as "Rank","Title" as "Name","Year" as "Release_Year" from netflix; 
+
+-- Total count of titles --
+
 select count(*)from netflix;
+
+-- Total number of titles across total number of unique series of a particular series --
+
 select count("Title") as "No_of_Titles",count(distinct "Series") as "N0_of_Series" from netflix where "Title"='Delhi Crime';
 select sum("Rating") as "Total_Ratings" from netflix where "Series"='TV-MA';
 select avg("Rating") as "Average_Ratings" from netflix where "Series"='R';
