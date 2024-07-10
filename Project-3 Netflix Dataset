@@ -30,7 +30,7 @@ select * from netflix where "Title" like '_____ %';
 
 select * from netflix where "Series" = 'PG-13' order by "S.No";
 
--- Total number of series from PG-13 order by serial number in descending order --
+-- Total number of series from series 'PG-13' order by serial number in descending order --
 
 select * from netflix where "Series" = 'PG-13' order by "S.No" desc;
 
@@ -46,11 +46,11 @@ select * from netflix order by 2 asc;
 
 select * from netflix order by "Year" desc;
 
--- Top 10 titles after 2006 in descending order --
+-- Top 10 titles after year 2006 in descending order --
 
 select * from netflix where "Year">'2006' order by "Year" desc limit 10;
 
--- Top 20 titles after 2010 in ascending order --
+-- Top 20 titles after year 2010 in ascending order --
 
 select * from netflix where "Year">'2006' order by "Year" asc limit 20;
 
@@ -62,7 +62,7 @@ select "S.No" as "Rank","Title" as "Name","Year" as "Release_Year" from netflix;
 
 select count(*)from netflix;
 
--- Total number of titles across total number of unique series of a particular series --
+-- Total number of titles across total number of unique series of a particular title --
 
 select count("Title") as "No_of_Titles",count(distinct "Series") as "N0_of_Series" from netflix where "Title"='Delhi Crime';
 
@@ -74,11 +74,11 @@ select sum("Rating") as "Total_Ratings" from netflix where "Series"='TV-MA';
 
 select avg("Rating") as "Average_Ratings" from netflix where "Series"='R';
 
--- Minimum Ratings of titles from 2000 to 2010 --
+-- Minimum Ratings of titles from year 2000 to 2010 --
 
 select min("Rating") as "Min_Ratings" from netflix where "Year" between '2000' and '2010';
 
--- Maximum Ratings of titles from 2000 to 2010 --
+-- Maximum Ratings of titles from year 2000 to 2010 --
 
 select max("Rating") as "Max_Ratings" from netflix where "Year" between '2000' and '2010';
 
@@ -94,7 +94,7 @@ select "Year",sum("Rating") as "Total_Ratings" from netflix group by "Year" orde
 
 -- Minimum Ratings, Maximum Ratings and Total Ratings group by Genres --
 
-select "Genres",min("Rating")as "Min_Ratings", max("Rating") as "Max_Ratings", sum("Rating") as "Total_Ratings" 
+select "Genres",min("Rating") as "Min_Ratings", max("Rating") as "Max_Ratings", sum("Rating") as "Total_Ratings" 
 from netflix group by "Genres" order by "Total_Ratings";
 
 -- Total number of titles group by Genre having rank greater than 100 --
