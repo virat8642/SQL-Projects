@@ -84,16 +84,34 @@ select max("Likes") as "Max_Likes" from "Youtubers" where "Views" between 100000
 
 select * from "Youtubers";
 
+-- Total number of youtube channels group by username --
+
 select "Username",  count("Channel Name") as "No_of_Channels" from "Youtubers" group by "Username";
+
+-- Total likes of youtube channels group by country order by Total likes in descending order --
+
 select "Country",sum("Likes")as "Total_Likes" from "Youtubers" group by "Country" order by "Total_Likes" desc;
+
+-- Minimum likes, Maximum likes and Total likes of youtube channels group by category --
+
 select "Category",min("Likes")as "Min_Likes",max("Likes")as "Max_Likes",sum("Likes") as "Total_Likes"
 from "Youtubers" group by "Category" order by "Total_Likes";
+
+-- Total number of youtube channels group by category having count greater than 10 --
+
 select "Category", count("Channel Name") as "Channel_count" from "Youtubers" group by "Category" having count("Channel Name")>10;
+
+-- Categorizing the youtube channels by followers --
 
 select * ,case when "Followers"<10000000 then 'Less Than 10 Million Subscibers' when "Followers" between 10000000 and 100000000 then '10 to 100 Million Subscribes'
 else 'Greater than 100 Million Subscribers' end as "Subscribers" from "Youtubers";
+
+-- Renaming the country name --
+
 select "Channel Name","Country", replace("Country",'US','United States') as "New_Country" from "Youtubers";
+
 select "Category","Channel Name",substring("Category" for 2 ) as "Category_group" from "Youtubers" where substring("Category" for 2 )='Ga';
+
 select "Category",string_agg("Username",' ,') from "Youtubers"  group by "Category" order by "Category";
 
 explain select * from "Youtubers";
