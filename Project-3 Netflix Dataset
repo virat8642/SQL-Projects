@@ -2,11 +2,28 @@ select * from netflix;
 
 copy public."netflix" from 'C:\download\course softwares\DATASETS\Netflix.csv' delimiter ',' csv header encoding 'windows-1251';
 
+-- Total number of series in Documentaries and Thrillers Genre --
+
 select * from netflix where "Genres" in('Documentaries','Thrillers');
+
+-- Total number of series from 1 to 100 --
+
 select * from netflix where "S.No" between 1 and 100;
+
+-- Total number of series where serial number is not between 1 to 100 --
+
 select * from netflix where "S.No" not between 1 and 100;
+
+-- Total number of series whose name starts with P --
+
 select * from netflix where "Title" like 'P%';
+
+-- Total number of series whose name contain 'the' --
+
 select * from netflix where "Title" like '%the%';
+
+-- Total number of series whose first name contain only 4 characters --
+
 select * from netflix where "Title" like '_____ %';
 
 select distinct "Genres" from netflix where "Genres" not like 'T%';
