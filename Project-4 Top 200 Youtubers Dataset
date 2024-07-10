@@ -2,14 +2,30 @@ select * from "Youtubers";
 
 copy public."Youtubers" from 'C:\download\course softwares\DATASETS\top_200_youtubers.csv' delimiter ',' csv header encoding 'windows-1251';
 
-select * from "Youtubers" where "Category" in('Fashion','Music');
-select * from "Youtubers" where "Followers" between 50000000 and 90000000;
-select * from "Youtubers" where "Followers" not between 50000000 and 90000000;
-select * from "Youtubers" where "Channel Name" like 'H%';
-select * from "Youtubers" where "Channel Name" like '%om';
-select * from "Youtubers" where "Channel Name" like '______ %';
+-- Total number of youtube channels from Fashion and Music category --
 
-select distinct "Category" from "Youtubers" where "Category" not like 'D%';
+select * from "Youtubers" where "Category" in('Fashion','Music');
+
+-- Total number of youtube channels where followers between 50000000 and 90000000 --
+
+select * from "Youtubers" where "Followers" between 50000000 and 90000000;
+
+-- Total number of youtube channels where followers not between 50000000 and 90000000--
+
+select * from "Youtubers" where "Followers" not between 50000000 and 90000000;
+
+-- Total number of youtube channels whose name starts with H --
+
+select * from "Youtubers" where "Channel Name" like 'H%';
+
+-- Total number of youtube channels whose name ends with 'om' --
+
+select * from "Youtubers" where "Channel Name" like '%om';
+
+-- Total number of youtube channels whose first name contain only 4 characters --
+
+select * from "Youtubers" where "Channel Name" like '_____ %';
+
 select * from "Youtubers" where "Main Video Category" = 'Entertainment' order by "Channel Name";
 select * from "Youtubers" where "Main Video Category" = 'Entertainment' order by "Channel Name" desc;
 select * from "Youtubers" order by "Category" asc,"Channel Name" desc;
