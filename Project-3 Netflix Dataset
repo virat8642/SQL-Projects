@@ -65,35 +65,55 @@ select count(*)from netflix;
 -- Total number of titles across total number of unique series of a particular series --
 
 select count("Title") as "No_of_Titles",count(distinct "Series") as "N0_of_Series" from netflix where "Title"='Delhi Crime';
+
+-- Total Ratings of series 'TV-MA' --
+
 select sum("Rating") as "Total_Ratings" from netflix where "Series"='TV-MA';
+
+-- Average Ratings of series 'R' --
+
 select avg("Rating") as "Average_Ratings" from netflix where "Series"='R';
 
+-- Minimum Ratings of titles from 2000 to 2010 --
+
 select min("Rating") as "Min_Ratings" from netflix where "Year" between '2000' and '2010';
+
+-- Maximum Ratings of titles from 2000 to 2010 --
+
 select max("Rating") as "Max_Ratings" from netflix where "Year" between '2000' and '2010';
 
 select * from netflix;
+
+-- Total number of titles group by Director --
+
 select "Director",count("S.No") as "No_of_Titles" from netflix group by "Director";
+
+-- Total Ratings group by year order by Total Ratings in descending order --
+
 select "Year",sum("Rating") as "Total_Ratings" from netflix group by "Year" order by "Total_Ratings" desc;
+
+-- Minimum Ratings, Maximum Ratings and Total Ratings group by Genres --
+
 select "Genres",min("Rating")as "Min_Ratings", max("Rating") as "Max_Ratings", sum("Rating") as "Total_Ratings" 
 from netflix group by "Genres" order by "Total_Ratings";
 
+-- Total number of titles group by Genre having rank greater than 100 --
+
 select "Genres",count("S.No") as "Title_count" from netflix group by "Genres" having count("S.No")>100;
+
+-- Categorizing the titles by Time Duration --
+
 select * ,case when ("Duration(in Minutes)")<180 then '2 Hr Movie' when ("Duration(in Minutes)") between 180 and 240 then '3 Hr Movie'
 else 'Seasons' end as "Title_Duration" from netflix;
 
+-- Renaming the Production Country --
+
 select "Title","Production Country", replace("Production Country",'Australia','AUS') as "New_Production_Country" from netflix;
+
 select "Series","Title",substring("Series" for 2 ) as "Series_group" from netflix where substring("Series" for 2 )='PG';
+
 select "Genres",string_agg("Director",' ,') from netflix group by "Genres" order by "Genres";
 
-select * from netflix where "Title" like 'Po%';
-select * from netflix where "Title" like '%ot';
-select "Title" from netflix where "Title" not like 'Po%';
-
-select * from netflix where "Title" ~* '^a+[a-z\s]+$';
-select * from netflix where "Title" ~* '^(a|b|c|d)+[a-z\s]+$';
-select * from netflix where "Title" ~* '^(a|b|c|d)[a-z]{3}\s[a-z]{4}';
-
-select "Rating",'Total Ratings is '||to_char("Rating",'9.99') as message from netflix;
 explain select * from netflix;
 explain select distinct * from netflix; 
 
