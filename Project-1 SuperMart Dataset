@@ -96,7 +96,7 @@ select * from customer;
 
 select region,count(customer_id) as customer_count from customer group by region;
 
--- Total number of products sold group by each product ID in descending order by quantity sold from sales table --
+-- Total number of products sold group by each product ID and order by quantity sold in descending order from sales table --
 
 select product_id,sum(quantity) as quantity_sold from sales group by product_id order by quantity_sold desc;
 
