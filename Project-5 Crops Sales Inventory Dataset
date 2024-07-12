@@ -13,7 +13,7 @@ select * from sales where "Unit Price" between 1 and 4;
 select * from customer where "Customer Name" like 'S%';
 select * from customer where "Customer Name" like '%ne%';
 select * from customer where "Customer Name" like '____ %';
-select distinct "City" from customer where "City" not like 'M%';
+
 
 select * from customer where "City"='Antwerp' order by Customer;
 select * from customer where "City"='Antwerp' order by Customer desc;
@@ -71,16 +71,6 @@ where substring("Customer Name" for 1)='A';
 
 select "Customer",string_agg("Total Amount"', ') from sales group by "Customer" order by "Customer";
 
-select * from customer;
-select * from customer where "Customer Name" like 'Co%';
-select * from customer where "Customer Name" like '%re%';
-select "Customer Name" from customer where "Customer Name" not like'J%';
-
-select * from customer where "Customer Name" ~* '^a+[a-z\s]+$';
-select * from customer where "Customer Name" ~* '^(a|b|c|d)+[a-z\s]+$';
-select * from customer where "Customer Name" ~* '^(a|b|c|d)[a-z]{5}\s[a-z]{7}';
-
-select "Total Amount",'Total Amount for product is '||to_char("Total Amount",'$99.99') as message from sales;
 explain select * from sales;
 explain select distinct * from sales;
 
