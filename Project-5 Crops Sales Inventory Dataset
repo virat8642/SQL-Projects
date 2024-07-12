@@ -70,11 +70,28 @@ select "Customer" as "Customer_id","Country" as "Customer Country","City" as "Cu
 
 select count(*) from sales;
 
+-- Total number of products ordered and total number of quantity sold from sales table for a particular customer ID from sales table --
+
 select count("Product")as No_of_Products,count("Quantity")as No_of_Quantity from sales where "Customer"=7;
+
+-- Total discount from sales table --
+
 select sum("Discount") as "Total Discount" from sales;
+
+-- Total quantity for a particular unit price from sales table --
+
 select sum("Quantity") as "Total Quantity" from sales where "Unit Price"=1.50;
+
+-- Average unit price from product table --
+
 select avg("Product Unit Price") as "Avg Unit Price" from product;
+
+-- Minimum amount where quantity is 5 from sales table --
+
 select min("Total Amount") as "Min Amount" from sales where "Quantity"=5;
+
+-- Maximum amount where quantity is 5 from sales table --
+
 select max("Total Amount") as "Max Amount" from sales where "Quantity"=5;
 
 select "Country Code",count("Customer") as "Customer_Count" from customer group by "Country Code";
