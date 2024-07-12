@@ -94,7 +94,12 @@ select min("Total Amount") as "Min Amount" from sales where "Quantity"=5;
 
 select max("Total Amount") as "Max Amount" from sales where "Quantity"=5;
 
+-- Total count of customers in each country code from customer table group by country code --
+
 select "Country Code",count("Customer") as "Customer_Count" from customer group by "Country Code";
+
+-- Total quantity of products sold group by product name and order by quantity sold in descending order from sales table --
+
 select "Product",sum("Quantity") as "Quantity_Sold" from sales group by "Product" order by "Quantity_Sold" desc;
 select "Customer",min("Total Amount") as "Min_Amount",max("Total Amount") as "Max_Amount",sum("Total Amount") as "Total_Amount" from sales
 group by "Customer" order by "Total_Amount";
