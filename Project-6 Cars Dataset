@@ -9,7 +9,7 @@ select * from cars where "Name" like 'T%';
 select * from cars where "Name" like '%Q%';
 select * from cars where "Name" like '______ %';
 
-select distinct "Name" from cars where "Name" not like 'M%';
+
 select * from cars where "Color Varients" = 10 order by "Name";
 select * from cars where "Color Varients" = 10 order by "Name" desc;
 select * from cars order by "Length" asc,"Name" desc;
@@ -43,13 +43,6 @@ select "Fuel_Type",string_agg("Name",', ')from cars group by "Fuel_Type" order b
 
 select * from cars where "Name" like 'Ma%';
 select * from cars where "Name" like '%io';
-select "Name" from cars where "Name" not like'Ma%';
-
-select * from cars where "Name" ~* '^a+[a-z\s]+$';
-select * from cars where "Name" ~* '^(a|b|c|d)+[a-z\s]+$';
-select * from cars where "Name" ~* '^(a|b|c|d)[a-z]{3}\s[a-z]{4}';
-
-select "Color_Varients" ,'Total Color_Varients is'||to_char("Color_Varients",' 99') as message from cars;
 
 explain select * from cars;
 explain select distinct * from cars;
