@@ -14,7 +14,6 @@ select * from batsman where "Player_ID" between 5000 and 10000;
 select * from batsman where "Batsman" like 'H%';
 select * from batsman where "Batsman" not like '%Ra%';
 select * from batsman where "Batsman" like '_____ %';
-select distinct "Opposition" from batsman where "Opposition" not like 'I%';
 
 select * from batsman where "City" = 'Dublin' order by "Match_ID";
 select * from batsman where "City" = 'Dublin' order by "Match_ID" desc;
@@ -78,11 +77,6 @@ select "Player_ID"||' - '||"Batsman" as "Player_Full_ID" from batsman;
 select "Player_ID","Batsman",substring("Batsman" for 1) as "Batsman_Name_Group" from batsman
 where substring("Batsman" for 1)='D';
 
-select * from batsman where "Batsman" ~* '^a+[a-z\s]+$';
-select * from batsman where "Batsman" ~* '^(a|b|c|d)+[a-z\s]+$';
-select * from batsman where "Batsman" ~* '^(a|b|c|d)[a-z]{5}\s[a-z]{7}';
-
-select "6s",'Total Sixes by Batsman is '||to_char("6s",'99') as message from batsman;
 explain select * from batsman;
 explain select distinct * from batsman;
 
