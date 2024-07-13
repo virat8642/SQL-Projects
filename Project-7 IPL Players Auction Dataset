@@ -9,7 +9,7 @@ select * from "IPL players" where "Team" like 'De%';
 select * from "IPL players" where "Team" not like '%ns';
 select * from "IPL players" where "Team" like '_____ %';
 
-select distinct "Team" from "IPL players" where "Team" not like 'Ro%';
+
 select * from "IPL players" where "Team" = 'Sunrisers Hyderabad' order by "Role";
 select * from "IPL players" where "Team" = 'Sunrisers Hyderabad' order by "Role" desc;
 select * from "IPL players" order by "Player" asc , "Team" desc;
@@ -39,14 +39,7 @@ select "Team",string_agg("Player",', ') from "IPL players" group by "Team" order
 
 select * from "IPL players" where "Team" like 'Ch%';
 select * from "IPL players" where "Team" like '%ls';
-select "Team" from "IPL players" where "Team" not like 'Ro%';
 
-select * from "IPL players" where "Player" ~* '^a+[a-z\s]+$';
-select * from "IPL players" where "Team" ~* '^(a|b|c|d)+[a-z\s]+$';
-select * from "IPL players" where "Player" ~* '^(a|b|c|d)[a-z]{3}\s[a-z]{4}';
-
-select "Amount",'Total Amount is'||to_char("Amount",'9999999999') as message from "IPL players";
-explain select * from "IPL players";
 explain select distinct * from "IPL players";
 
 create schema test;
