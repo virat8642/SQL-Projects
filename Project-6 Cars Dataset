@@ -42,20 +42,32 @@ select * from cars order by 2 asc;
 
 select * from cars order by "Width" desc;
 
+-- Top 10 cars of fuel capacity greater than 50 in descending order --
+
 select * from cars where "Fuel_Capacity">50 order by "Fuel_Capacity" desc limit 10;
+
+-- Top 20 cars of fuel capacity greater than 50 in ascending order --
+
 select * from cars where "Fuel_Capacity">50 order by "Fuel_Capacity" asc limit 20;
 
-select "Name" as "Car_Name","Price" as "Car_Price" from cars;
-select count(*) from cars;
-select count("Name")as No_of_Cars,count("Color_Varients") as "No_of_Colors" from cars where "Name"='Porsche Macan';
-select sum("Color_Varients") as "Total_Colors" from cars;
-select sum("Color_Varients") as "Total_Colors" from cars where "Name"='Ferrari GTC4 Lusso';
-select avg("Color_Varients") as "Total_Average_Colors_Count" from cars;
+--Renaming the column using AS keyword --
 
-select min("Color_Varients") as "Min_Colors" from cars where "Length" between 4000 and 5000; 
-select max("Color_Varients") as "Max_Colors" from cars where "Length" between 4000 and 5000; 
+select "Name" as "Car_Name","Price" as "Car_Price" from cars;
+
+-- Total count of cars --
+
+select count(*) from cars;
+
+-- Total number of cars sold across total number of color varients of a particular car --
+
+select count("Name")as No_of_Cars,count("Color_Varients") as "No_of_Colors" from cars where "Name"='Porsche Macan';
+
+-- Total colors of a particular car --
+
+select sum("Color_Varients") as "Total_Colors" from cars where "Name"='Ferrari GTC4 Lusso';
 
 select * from cars;
+
 select "Fuel_Type",count("Name") as "No_of_Cars" from cars group by "Fuel_Type";
 select "Name",sum("Color_Varients") as "Total_Colors" from cars group by "Name" order by "Total_Colors";
 select "Fuel_Type",min("Color_Varients")as"Min_Colors",max("Color_Varients")as "Max_Colors",sum("Color_Varients")as "Total_Colors"
