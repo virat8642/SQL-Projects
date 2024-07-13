@@ -101,22 +101,36 @@ select "Country Code",count("Customer") as "Customer_Count" from customer group 
 -- Total quantity of products sold group by product name and order by quantity sold in descending order from sales table --
 
 select "Product",sum("Quantity") as "Quantity_Sold" from sales group by "Product" order by "Quantity_Sold" desc;
+
+-- Minimum amount, Maximium amount and Total amount group by customer order by total amount from sales table --
+
 select "Customer",min("Total Amount") as "Min_Amount",max("Total Amount") as "Max_Amount",sum("Total Amount") as "Total_Amount" from sales
 group by "Customer" order by "Total_Amount";
+
+-- Total number of customers in each country where number of customers is greater than 2 from customer table --
+
 select "Country",count("Customer") as "Customer_Count" from customer group by "Country" having count("Customer")>2;
 
 select * from sales;
 select * from customer;
 select * from product;
 
+-- Inner Join --
+
 select a."Product",a."Quantity",a."Customer",a."Total Amount",b."Customer Name",b."Date of Birth"
 from sales as a inner join customer as b on a."Customer"=b."Customer" order by "Customer";
+
+-- Left Join --
 
 select a."Product",a."Quantity",a."Customer",a."Total Amount",b."Customer Name",b."Date of Birth"
 from sales as a left join customer as b on a."Customer"=b."Customer" order by "Customer";
 
+-- Right Join --
+
 select a."Product",a."Quantity",a."Customer",a."Total Amount",b."Customer Name",b."Date of Birth"
 from sales as a right join customer as b on a."Customer"=b."Customer" order by "Customer";
+
+-- Full Join --
 
 select a."Product",a."Quantity",a."Customer",a."Total Amount",b."Customer Name",b."Date of Birth",b."Customer"
 from sales as a full join customer as b on a."Customer"=b."Customer" order by a."Customer",b."Customer";
