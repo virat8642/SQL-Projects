@@ -2,19 +2,46 @@ select * from cars;
 
 copy public."cars" from 'C:\download\course softwares\DATASETS\cars1.csv' delimiter ',' csv header;
 
+-- Total number of cars in Audi Q2 and BMW X7 --
+
 select * from cars where "Name" in('Audi Q2','BMW X7');
+
+-- Total number of cars where fuel capacity is between 50 to 80 --
+
 select * from cars where "Fuel Capacity" between 50 and 80;
+
+-- Total number of cars where fuel capacity is not between 50 to 80 --
+
 select * from cars where "Fuel Capacity" not between 50 and 80;
+
+-- Total number of cars whose name starts with T --
+
 select * from cars where "Name" like 'T%';
-select * from cars where "Name" like '%Q%';
+
+-- Total number of cars whose first name contain only 4 characters --
+
 select * from cars where "Name" like '______ %';
 
+-- Total number of cars of color varient 10 order by name --
 
 select * from cars where "Color Varients" = 10 order by "Name";
+
+-- Total number of cars of color varient 10 order by name in descending order --
+
 select * from cars where "Color Varients" = 10 order by "Name" desc;
+
+-- Total number of cars order by length in ascending order and Name in descending order --
+
 select * from cars order by "Length" asc,"Name" desc;
+
+-- Total number of cars order by column name 2 in ascending order --
+
 select * from cars order by 2 asc;
+
+-- Total number of cars order by width in descending order --
+
 select * from cars order by "Width" desc;
+
 select * from cars where "Fuel_Capacity">50 order by "Fuel_Capacity" desc limit 10;
 select * from cars where "Fuel_Capacity">50 order by "Fuel_Capacity" asc limit 20;
 
