@@ -10,7 +10,6 @@ select * from bank where "First Name" like 'We%';
 select * from bank where "Last Name" like '%rr%';
 select * from bank where "First Name" like '____%';
 
-select distinct "First Name" from bank where "First Name" not like 'A%';
 select * from bank where "Gender"='Male' order by "Customer ID";
 select * from bank where "Gender"='Male' order by "Customer ID" desc;
 select * from bank order by "First Name" asc , "Last Name" desc;
@@ -43,12 +42,7 @@ select "First Name","Gender",replace("Gender",'Male','M')as "New Gender Category
 select "First Name","Customer ID",substring("First Name" for 2 ) as "Name Category" from bank where substring("First Name" for 2 ) = 'Ka';
 select "First Name",string_agg("Last Name",' ') from bank group by "First Name" order by "First Name";
 
-select * from bank where "First Name" ~* '^a+[a-z\s]+$';
-select * from bank where "First Name" ~* '^(a|b|c|d)+[a-z\s]+$';
-select * from bank where "First Name" ~* '^(a|b|c|d)[a-z]{3}\s[a-z]{4}';
+explain select distinct * from bank;
 
-select "Balance", 'Total Balance is'||to_char("Balance",'9999999.99') as message from bank;
-explain select * from bank;
-explain select distinct * from bank; 
 create schema test;
 create table test.bank as select * from bank;
