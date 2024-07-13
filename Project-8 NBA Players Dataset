@@ -9,7 +9,6 @@ select * from "NBA Players" where "College" like 'F%';
 select * from "NBA Players" where "College" like '%te';
 select * from "NBA Players" where "College" like '_____ %';
 
-select distinct "Team" from "NBA Players" where "Team" not like 'K%';
 select * from "NBA Players" where "Country"='Greece' order by "Team";
 select * from "NBA Players" where "Country"='Greece' order by "Team" desc;
 select * from "NBA Players" order by "Country" asc , "Team" desc;
@@ -41,13 +40,6 @@ select "Team",string_agg("Name",', ') from "NBA Players" group by "Team" order b
 
 select * from "NBA Players" where "Team" like 'De%';
 select * from "NBA Players" where "Team" like '%es';
-select "Team" from "NBA Players" where "Team" not like '%rs';
-
-select * from "NBA Players" where "Team" ~* '^a+[a-z\s]+$';
-select * from "NBA Players" where "Team" ~* '^(a|b|c|d)+[a-z\s]+$';
-select * from "NBA Players" where "Name" ~* '^(a|b|c|d)[a-z]{3}\s[a-z]{5}';
-
-select "Rating",'Total Rating is'||to_char("Rating",'999') as message from "NBA Players";
 
 explain select * from "NBA Players";
 explain select distinct * from "NBA Players";
