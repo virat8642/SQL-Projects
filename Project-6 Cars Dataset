@@ -68,19 +68,34 @@ select sum("Color_Varients") as "Total_Colors" from cars where "Name"='Ferrari G
 
 select * from cars;
 
+-- Total number of cars group by fuel type --
+
 select "Fuel_Type",count("Name") as "No_of_Cars" from cars group by "Fuel_Type";
+
+-- Total number of cars group by name order by total colors --
+
 select "Name",sum("Color_Varients") as "Total_Colors" from cars group by "Name" order by "Total_Colors";
+
+-- Minimum colors, Maximum colors and Total colors group by fuel type --
+
 select "Fuel_Type",min("Color_Varients")as"Min_Colors",max("Color_Varients")as "Max_Colors",sum("Color_Varients")as "Total_Colors"
 from cars group by "Fuel_Type";
+
+-- Total number of games group by platform having rank greater than 200 --
+
 select "Transmission",count("Color_Varients") as "Total_Colors" from cars group by "Transmission" having count("Color_Varients")>20;
+
 select * , case when "Top_Speed"<120 then 'Low Speed Car' when "Top_Speed" between 120 and 200 then 'Medium Speed Car'
 else 'High Speed Car' end as "Speed Category" from cars; 
 
 select "Transmission","Name",replace("Transmission",'Automatic','AU') as "New_Transmission_Name" from cars;
+
 select "Name","EMI",substring("Name" for 2) as "Name_Group" from cars where substring("Name" for 2) = 'Ro';
+
 select "Fuel_Type",string_agg("Name",', ')from cars group by "Fuel_Type" order by "Fuel_Type";
 
 select * from cars where "Name" like 'Ma%';
+
 select * from cars where "Name" like '%io';
 
 explain select * from cars;
