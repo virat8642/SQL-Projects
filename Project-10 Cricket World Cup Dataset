@@ -6,13 +6,32 @@ copy public."batsman" from 'C:\download\course softwares\DATASETS\Cricket world 
 copy public."bowler" from 'C:\download\course softwares\DATASETS\Cricket world cup\Bowler.csv' delimiter ',' csv header;
 copy public."ODI_Results" from 'C:\download\course softwares\DATASETS\Cricket world cup\ODIResults.csv' delimiter ',' csv header;
 
+-- Total ODI Results from Bangladesh and England countries from ODI Results table --
+
 select * from "ODI_Results" where "Country" in('Bangladesh','England');
+
+-- Total ODI Results where country ID is between 1 to 10 from ODI Results table --
+
 select * from "ODI_Results" where "Country_ID" between 1 and 10;
+
+-- Total ODI Results where country ID is not between 1 to 10 from ODI Results table --
+
 select * from "ODI_Results" where "Country_ID" not between 1 and 10;
+
+-- Total number of batsman where Player ID is between 5000 to 10000 from batsman table --
+
 select * from batsman where "Player_ID" between 5000 and 10000;
 
+-- Total number of batsman whose name starts from H from batsman table --
+
 select * from batsman where "Batsman" like 'H%';
-select * from batsman where "Batsman" not like '%Ra%';
+
+-- Total number of batsman whose name contain Ra from batsman table --
+
+select * from batsman where "Batsman" like '%Ra%';
+
+-- Total numbers of bastman whose first name contain only 4 characters from bastman table --
+
 select * from batsman where "Batsman" like '_____ %';
 
 select * from batsman where "City" = 'Dublin' order by "Match_ID";
