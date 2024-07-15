@@ -34,19 +34,54 @@ select * from batsman where "Batsman" like '%Ra%';
 
 select * from batsman where "Batsman" like '_____ %';
 
+-- Total numbers of bastman from Dublin city order by match ID from bastman table --
+
 select * from batsman where "City" = 'Dublin' order by "Match_ID";
+
+-- Total numbers of bastman from Dublin city order by match ID in descending order from bastman table --
+
 select * from batsman where "City" = 'Dublin' order by "Match_ID" desc;
+
+-- Total numbers of bastman from all cities in ascending order and match ID in descending order from batsman table --
+
 select * from batsman order by "City" asc,"Match_ID" desc;
+
+-- Total numbers of bastman in ascending order by column number 2 from bastman table --
+
 select * from batsman order by 2 asc;
+
+-- Total numbers of bastman by player ID in descending order --
+
 select * from batsman order by "Player_ID" desc;
+
+-- Top 10 bastman whose player ID is greater than 100000 in descending order from bastman table --
+
 select * from batsman where "Player_ID">100000 order by "Player_ID" desc limit 10;
+
+-- Top 20 bastman whose player ID is greater than 100000 in ascending order from bastman table --
+
 select * from batsman where "Player_ID">100000 order by "Player_ID" asc limit 20;
 
+-- Renaming the column using AS keyword --
+
 select "Batsman" as "Batsman Name","City" as "Match City","Opposition" as "Opponent" from batsman;
+
+-- Total count of bastman from batsman table --
+
 select count(*) from batsman;
+
+-- Total number of 4s and 6s from batsman table for a particular player ID--
+
 select count("4s") as "No_of_4s",count("6s") as "No_of_6s" from batsman where "Player_ID"='24598';
+
+-- Total 6s from batsman table --
+
 select sum("6s") as "Total_6s" from batsman;
+
+-- Total 4s from batsman table for a particular bastman --
+
 select sum("4s") as "Total_4s" from batsman where "Batsman" = 'Jason Roy';
+
 select avg("Overs") as "Average Overs" from bowler;
 
 select min("Wickets") as "Min Wickets" from bowler where "Player_ID"='326016';
