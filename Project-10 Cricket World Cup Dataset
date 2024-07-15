@@ -82,17 +82,30 @@ select sum("6s") as "Total_6s" from batsman;
 
 select sum("4s") as "Total_4s" from batsman where "Batsman" = 'Jason Roy';
 
+-- Average overs from bowler table --
+
 select avg("Overs") as "Average Overs" from bowler;
 
+-- Minimum wickets from bowler table for a particular player ID --
+
 select min("Wickets") as "Min Wickets" from bowler where "Player_ID"='326016';
+
+-- Maximum wickets from bowler table for a particular player ID --
+
 select max("Wickets") as "Max Wickets" from bowler where "Player_ID"='326016';
 
 select * from batsman;
 select * from bowler;
 select * from "ODI_Results";
 
+-- Total number of matches group by country from ODI Results table --
+
 select "Country",count("Match_ID") as "No_of_Matches" from "ODI_Results" group by "Country";
+
+-- Total number of matches group by city order by total matches from ODI Results table --
+
 select "City",count("Match_ID") as "Total Matches" from "ODI_Results" group by "City" order by "Total Matches" desc;
+
 select "Player_ID",max("4s") as "Max_4s",max("6s") as "Max_6s",sum("4s") as "Total_4s",sum("6s") as "Total_6s" 
 from batsman group by "Player_ID" order by "Total_6s";
 
