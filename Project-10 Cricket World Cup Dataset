@@ -102,14 +102,21 @@ select * from "ODI_Results";
 
 select "Country",count("Match_ID") as "No_of_Matches" from "ODI_Results" group by "Country";
 
--- Total number of matches group by city order by total matches from ODI Results table --
+-- Total number of matches group by city order by total matches in descending order from ODI Results table --
 
 select "City",count("Match_ID") as "Total Matches" from "ODI_Results" group by "City" order by "Total Matches" desc;
+
+-- Maximum 4s, 6s and Total 4s, 6s group by player ID order by total 6s from bastman table --
 
 select "Player_ID",max("4s") as "Max_4s",max("6s") as "Max_6s",sum("4s") as "Total_4s",sum("6s") as "Total_6s" 
 from batsman group by "Player_ID" order by "Total_6s";
 
+-- Total number of matches group by country from ODI Results table having match ID count greater than 200 --
+
 select "Country",count("Match_ID") as "No_of_Matches" from "ODI_Results" group by "Country" having count("Match_ID")>200;
+
+-- Total bastman according to number of 6s and classifying them in sixes category from bastman table --
+
 select * , case when "6s"< 5 then 'Low Sixes' when "6s" between 5 and 10 then 'Medium Sixes' else 'High Sixes' 
 end as "Sixes Category" from batsman;
 
@@ -117,14 +124,23 @@ select * from batsman;
 select * from bowler;
 select * from "ODI_Results";
 
+
+-- Inner Join --
+
 select a."Match_ID",a."Batsman",a."Player_ID",a."6s",b."Country_ID",b."Country"
 from batsman as a inner join "ODI_Results" as b on a."Match_ID"=b."Match_ID" order by "Match_ID";
+
+-- Left Join --
 
 select a."Match_ID",a."Batsman",a."Player_ID",a."6s",b."Country_ID",b."Country"
 from batsman as a left join "ODI_Results" as b on a."Match_ID"=b."Match_ID" order by "Match_ID";
 
+-- Right Join --
+
 select a."Match_ID",a."Batsman",a."Player_ID",a."6s",b."Country_ID",b."Country"
 from batsman as a right join "ODI_Results" as b on a."Match_ID"=b."Match_ID" order by "Match_ID";
+
+-- Full Join --
 
 select a."Match_ID",a."Batsman",a."Player_ID",a."6s",b."Country_ID",b."Country",b."Match_ID"
 from batsman as a full join "ODI_Results" as b on a."Match_ID"=b."Match_ID" order by a."Match_ID",b."Match_ID";
