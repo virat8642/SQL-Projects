@@ -2,22 +2,62 @@ select * from "NBA Players";
 
 copy public."NBA Players" from 'C:\download\course softwares\DATASETS\nba2k-1.csv' delimiter ',' csv header encoding 'windows-1251';
 
+-- Total NBA players in Los Angeles Lakers and Atlanta HawksSports team --
+
 select * from "NBA Players" where "Team" in ('Los Angeles Lakers','Atlanta Hawks');
+
+-- Total NBA Players where rating is between 60 and 70 --
+
 select * from "NBA Players" where "Rating" between 60 and 70;
+
+-- Total NBA Players where rating is not between 60 and 70 --
+
 select * from "NBA Players" where "Rating" not between 60 and 70;
+
+-- Total NBA Players where college name starts from F --
+
 select * from "NBA Players" where "College" like 'F%';
+
+-- Total NBA Players where college name ends with 'te' --
+
 select * from "NBA Players" where "College" like '%te';
+
+-- Total NBA players whose college name contain only 4 characters --
+
 select * from "NBA Players" where "College" like '_____ %';
 
+-- Total NBA players from Greece country order by team --
+
 select * from "NBA Players" where "Country"='Greece' order by "Team";
+
+-- Total NBA players from Greece country order by team in descending order --
+
 select * from "NBA Players" where "Country"='Greece' order by "Team" desc;
+
+-- Total NBA players order by country in ascending order and team in descending order --
+
 select * from "NBA Players" order by "Country" asc , "Team" desc;
+
+-- Total NBA players order by column name 2 in ascending order --
+
 select * from "NBA Players" order by 2 asc;
+
+-- Total NBA players from PC order by height in descending order --
+
 select * from "NBA Players" order by "Height" desc;
+
+-- Top 50 NBA players where weight is greater than 200 order by weight in descending order --
+
 select * from "NBA Players" where "Weight">200 order by "Weight" desc limit 50;
+
+-- Top 30 NBA players where weight is greater than 220 order by weight in ascending order --
+
 select * from "NBA Players" where "Weight">220 order by "Weight" asc limit 30;
 
+-- Renaming the column using AS keyword --
+
 select "Rating" as "Player Rating","Team" as "Player Team","Position" as "Player Position" from "NBA Players";
+
 select count(*) from "NBA Players";
 select count("Name") as "No_of_Players",count("Team") as "No_of_Teams" from "NBA Players" where "Team"='Chicago Bulls';
 select sum("Draft Peak") as "Total Draft Peak" from "NBA Players" where "Team"='Atlanta Hawks';
