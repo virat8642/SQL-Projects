@@ -70,7 +70,7 @@ select "Batsman" as "Batsman Name","City" as "Match City","Opposition" as "Oppon
 
 select count(*) from batsman;
 
--- Total number of 4s and 6s from batsman table for a particular player ID--
+-- Total number of 4s and 6s from batsman table for a particular player ID --
 
 select count("4s") as "No_of_4s",count("6s") as "No_of_6s" from batsman where "Player_ID"='24598';
 
@@ -123,7 +123,6 @@ end as "Sixes Category" from batsman;
 select * from batsman;
 select * from bowler;
 select * from "ODI_Results";
-
 
 -- Inner Join --
 
