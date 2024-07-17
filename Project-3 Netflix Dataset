@@ -110,7 +110,11 @@ else 'Seasons' end as "Title_Duration" from netflix;
 
 select "Title","Production Country", replace("Production Country",'Australia','AUS') as "New_Production_Country" from netflix;
 
+-- Substring function  --
+
 select "Series","Title",substring("Series" for 2 ) as "Series_group" from netflix where substring("Series" for 2 )='PG';
+
+-- String aggregate function  --
 
 select "Genres",string_agg("Director",' ,') from netflix group by "Genres" order by "Genres";
 
