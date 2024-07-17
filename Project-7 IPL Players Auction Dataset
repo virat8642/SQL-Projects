@@ -2,67 +2,101 @@ select * from "IPL players";
 
 copy public."IPL players" from 'C:\download\course softwares\DATASETS\IPLPlayerAuctionData.csv' delimiter ',' csv header;
 
--- Total number of players in Bastman and Bowler role --
+-- Total number of IPL players in Bastman and Bowler role --
 
 select * from "IPL players" where "Role" in('Bastman','Bowler');
 
--- Total number of players from 1000000 to 2000000 price --
+-- Total number of IPL players from 1000000 to 2000000 price --
 
 select * from "IPL players" where "Amount" between 1000000 and 20000000;
 
--- Total number of players where price not between 1000000 to 2000000 --
+-- Total number of IPL players where price not between 1000000 to 2000000 --
 
 select * from "IPL players" where "Amount" not between 1000000 and 20000000;
 
--- Total number of players whose team name starts with De --
+-- Total number of IPL players whose team name starts with De --
 
 select * from "IPL players" where "Team" like 'De%';
 
--- Total number of players whose team name contain only 4 characters --
+-- Total number of IPL players whose team name contain only 4 characters --
 
 select * from "IPL players" where "Team" like '_____ %';
 
--- Total number of players from Sunrisers Hyderabad order by role --
+-- Total number of IPL players from Sunrisers Hyderabad order by role --
 
 select * from "IPL players" where "Team" = 'Sunrisers Hyderabad' order by "Role";
 
--- Total number of players from Sunrisers Hyderabad order by role in descending order --
+-- Total number of IPL players from Sunrisers Hyderabad order by role in descending order --
 
 select * from "IPL players" where "Team" = 'Sunrisers Hyderabad' order by "Role" desc;
 
--- Total number of players order by player name in ascending order and team name in descending order --
+-- Total number of IPL players order by player name in ascending order and team name in descending order --
 
 select * from "IPL players" order by "Player" asc , "Team" desc;
 
+-- Total number of IPL players order by column name 3 in ascending order --
+
 select * from "IPL players" order by 3 asc;
+
+-- Total number of IPL players order by anount in descending order --
 
 select * from "IPL players" order by "Amount" desc;
 
+-- Top 50 IPL players after 2015 order by year in descending order --
+
 select * from "IPL players" where "Year">2015 order by "Year" desc limit 50;
 
+-- Top 30 IPL players after 2015 order by year in ascending order --
+
 select * from "IPL players" where "Year">2015 order by "Year" asc limit 30;
+
+--Renaming the column using AS keyword --
  
 select "Player" as "Player Name","Role" as "Player Role","Team" as "Player Team" from "IPL players";
+
+-- Total count of IPL players --
+
 select count(*) from "IPL players";
+
+-- Total number of IPL players of a particular team --
+
 select count("Team") as "No_of_Teams",count("Player") as "No_of_Players" from "IPL players" where "Team" ='Gujarat Lions';
+
+-- Total players amount from IPL players for a particular team --
+
 select sum("Amount") as "Total Players Amount" from "IPL players" where "Team"='Kolkata Knight Riders';
+
+-- Average amount from IPL players for a particular team --
+
 select avg("Amount") as "Avg Amount" from "IPL players" where "Team"='Kolkata Knight Riders';
 
 select * from "IPL players";
+
+-- Total number of teams played from IPL players group by player;
+
 select "Player", count("Team") as "No_of_Teams_Played" from "IPL players" group by "Player";
+
+-- Total players amount from IPL players group by team order by total player amount in descending order;
+
 select "Team",sum("Amount") as "Total Players Amount" from "IPL players" group by "Team" order by "Total Players Amount" desc;
+
+-- Minimum amount, maximum amount and total amount from IPL players group by team order by total player amount;
+
 select "Team",min("Amount") as "Player_Min_Amount", max("Amount") as "Player_Max_Amount",sum("Amount") as "Total Players Amount"
 from "IPL players" group by "Team" order by "Total Players Amount";
+
+-- Total number of IPL players group by team having year count greater than 3 --
+
 select "Team",count("Year") as "Year_count" from "IPL players" group by "Team" having count("Year")>3;
+
+-- Categorizing the IPL players by amount --
 
 select *, case when "Amount"<10000000 then 'Low Paid Players' when "Amount" between 10000000 and 100000000 then 'Mid Paid Players'
 else 'High Paid Players' end as "Player Amount" from "IPL players";
-select "Player","Team", replace("Team",'Mumbai','MUM') as "New_Team_Name" from "IPL players";
-select "Team","Player",substring("Team" for 2) as "Team_Group" from "IPL players" where substring("Team" for 2)='Su'; 
-select "Team",string_agg("Player",', ') from "IPL players" group by "Team" order by "Team";
 
-select * from "IPL players" where "Team" like 'Ch%';
-select * from "IPL players" where "Team" like '%ls';
+-- Renaming the team name --
+
+select "Player","Team", replace("Team",'Mumbai','MUM') as "New_Team_Name" from "IPL players";
 
 explain select distinct * from "IPL players";
 
