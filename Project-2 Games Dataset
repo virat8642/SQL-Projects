@@ -112,7 +112,11 @@ select * ,case when "Year"<'2000' then '20th Century' else '21st Century' end as
 
 select "Name","Platform",replace("Platform",'X360','Xbox 360') as "New_Platform_Name" from games;
 
+-- Substring function  --
+
 select "Platform","Name",substring("Platform" for 2) as "Platform_Group" from games where substring("Platform" for 2) = 'PS';
+
+-- String aggregate function --
 
 select "Platform",string_agg("Publisher",', ')from games group by "Platform" order by "Platform";
 
