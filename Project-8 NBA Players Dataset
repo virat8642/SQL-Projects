@@ -58,28 +58,65 @@ select * from "NBA Players" where "Weight">220 order by "Weight" asc limit 30;
 
 select "Rating" as "Player Rating","Team" as "Player Team","Position" as "Player Position" from "NBA Players";
 
+-- Total count of NBA players --
+
 select count(*) from "NBA Players";
+
+-- Total number of NBA players across total number of teams of a particular team --
+
 select count("Name") as "No_of_Players",count("Team") as "No_of_Teams" from "NBA Players" where "Team"='Chicago Bulls';
+
+-- Total draft peak of NBA players across total number of teams of a particular team --
+
 select sum("Draft Peak") as "Total Draft Peak" from "NBA Players" where "Team"='Atlanta Hawks';
+
+-- Average draft peak of NBA players across total number of teams of a particular team --
+
 select avg("Draft Peak") as "Average Draft Peak" from "NBA Players" where "Team"='Atlanta Hawks';
+
+-- Minimum rating of NBA players where height is between 150 and 200 --
+
 select min("Rating") as "Min_Rating" from "NBA Players" where "Height" between 150 and 200;
-select max("Rating") as "Min_Rating" from "NBA Players" where "Height" between 150 and 200;
+
+-- Maximum rating of NBA players where height is between 150 and 200 --
+
+select max("Rating") as "Max_Rating" from "NBA Players" where "Height" between 150 and 200;
 
 select * from "NBA Players";
+
+-- Total number of teams from NBA players group by country --
+
 select "Country",count("Team") as "No_of_Teams" from "NBA Players" group by "Country";
+
+-- Total draft peak from NBA players group by team order by total draft peak --
+
 select "Team",sum("Draft Peak") as "Total Draft Peak" from "NBA Players" group by "Team" order by "Total Draft Peak";
+
+-- Minimum draft peak, Maximum draft peak and total draft peak from NBA players group by team order by total draft peak --
+
 select "Team",min("Draft Peak") as "Min Draft Peak",max("Draft Peak") as "Max Draft Peak",sum("Draft Peak") as "Total Draft Peak"
 from "NBA Players" group by "Team" order by "Total Draft Peak";
+
+-- Total team count group by country having team count greater than 10 --
+
 select "Country",count("Team") as "Team_Count" from "NBA Players" group by "Country" having count("Team")>10;
+
+-- Categorizing the NBA players by rating --
 
 select *, case when "Rating"<70 then 'Low Rating Players' when "Rating" between 70 and 90 then 'Mid Rating Players' 
 else 'High Rating Players' end as "Ratings Category" from "NBA Players"; 
-select "Team","Country",replace("Country",'USA','United States') as "New_Country" from "NBA Players";
-select "Team","Country",substring("Team" for 2) as "Team Group" from "NBA Players" where substring("Team" for 2)='Lo';
-select "Team",string_agg("Name",', ') from "NBA Players" group by "Team" order by "Team";
 
-select * from "NBA Players" where "Team" like 'De%';
-select * from "NBA Players" where "Team" like '%es';
+-- Renaming the country name --
+
+select "Team","Country",replace("Country",'USA','United States') as "New_Country" from "NBA Players";
+
+-- Substring function --
+
+select "Team","Country",substring("Team" for 2) as "Team Group" from "NBA Players" where substring("Team" for 2)='Lo';
+
+-- String aggregate function --
+
+select "Team",string_agg("Name",', ') from "NBA Players" group by "Team" order by "Team";
 
 explain select * from "NBA Players";
 explain select distinct * from "NBA Players";
