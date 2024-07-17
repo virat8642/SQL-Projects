@@ -2,20 +2,44 @@ select * from "IPL players";
 
 copy public."IPL players" from 'C:\download\course softwares\DATASETS\IPLPlayerAuctionData.csv' delimiter ',' csv header;
 
+-- Total number of players in Bastman and Bowler role --
+
 select * from "IPL players" where "Role" in('Bastman','Bowler');
+
+-- Total number of players from 1000000 to 2000000 price --
+
 select * from "IPL players" where "Amount" between 1000000 and 20000000;
+
+-- Total number of players where price not between 1000000 to 2000000 --
+
 select * from "IPL players" where "Amount" not between 1000000 and 20000000;
+
+-- Total number of players whose team name starts with De --
+
 select * from "IPL players" where "Team" like 'De%';
-select * from "IPL players" where "Team" not like '%ns';
+
+-- Total number of players whose team name contain only 4 characters --
+
 select * from "IPL players" where "Team" like '_____ %';
 
+-- Total number of players from Sunrisers Hyderabad order by role --
 
 select * from "IPL players" where "Team" = 'Sunrisers Hyderabad' order by "Role";
+
+-- Total number of players from Sunrisers Hyderabad order by role in descending order --
+
 select * from "IPL players" where "Team" = 'Sunrisers Hyderabad' order by "Role" desc;
+
+-- Total number of players order by player name in ascending order and team name in descending order --
+
 select * from "IPL players" order by "Player" asc , "Team" desc;
+
 select * from "IPL players" order by 3 asc;
+
 select * from "IPL players" order by "Amount" desc;
+
 select * from "IPL players" where "Year">2015 order by "Year" desc limit 50;
+
 select * from "IPL players" where "Year">2015 order by "Year" asc limit 30;
  
 select "Player" as "Player Name","Role" as "Player Role","Team" as "Player Team" from "IPL players";
