@@ -50,7 +50,7 @@ select * from "IPL players" where "Year">2015 order by "Year" desc limit 50;
 
 select * from "IPL players" where "Year">2015 order by "Year" asc limit 30;
 
---Renaming the column using AS keyword --
+-- Renaming the column using AS keyword --
  
 select "Player" as "Player Name","Role" as "Player Role","Team" as "Player Team" from "IPL players";
 
@@ -72,15 +72,15 @@ select avg("Amount") as "Avg Amount" from "IPL players" where "Team"='Kolkata Kn
 
 select * from "IPL players";
 
--- Total number of teams played from IPL players group by player;
+-- Total number of teams played from IPL players group by player --
 
 select "Player", count("Team") as "No_of_Teams_Played" from "IPL players" group by "Player";
 
--- Total players amount from IPL players group by team order by total player amount in descending order;
+-- Total players amount from IPL players group by team order by total player amount in descending order --
 
 select "Team",sum("Amount") as "Total Players Amount" from "IPL players" group by "Team" order by "Total Players Amount" desc;
 
--- Minimum amount, maximum amount and total amount from IPL players group by team order by total player amount;
+-- Minimum amount, maximum amount and total amount from IPL players group by team order by total player amount --
 
 select "Team",min("Amount") as "Player_Min_Amount", max("Amount") as "Player_Max_Amount",sum("Amount") as "Total Players Amount"
 from "IPL players" group by "Team" order by "Total Players Amount";
