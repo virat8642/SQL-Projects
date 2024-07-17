@@ -10,7 +10,7 @@ select * from "Youtubers" where "Category" in('Fashion','Music');
 
 select * from "Youtubers" where "Followers" between 50000000 and 90000000;
 
--- Total number of youtube channels where followers not between 50000000 and 90000000--
+-- Total number of youtube channels where followers not between 50000000 and 90000000 --
 
 select * from "Youtubers" where "Followers" not between 50000000 and 90000000;
 
@@ -54,7 +54,7 @@ select * from "Youtubers" where "Boost Index">70 order by "Boost Index" desc lim
 
 select * from "Youtubers" where "Boost Index">70 order by "Boost Index" asc limit 10;
 
---Renaming the column using AS keyword --
+-- Renaming the column using AS keyword --
 
 select "Channel Name" as "Name","Username" as "UName","Main topic" as "Topic" from "Youtubers";
 
@@ -110,8 +110,11 @@ else 'Greater than 100 Million Subscribers' end as "Subscribers" from "Youtubers
 
 select "Channel Name","Country", replace("Country",'US','United States') as "New_Country" from "Youtubers";
 
+-- Substring function --
+
 select "Category","Channel Name",substring("Category" for 2 ) as "Category_group" from "Youtubers" where substring("Category" for 2 )='Ga';
 
+-- String aggregate function --
 select "Category",string_agg("Username",' ,') from "Youtubers"  group by "Category" order by "Category";
 
 explain select * from "Youtubers";
