@@ -94,7 +94,11 @@ else 'High Speed Car' end as "Speed Category" from cars;
 
 select "Transmission","Name",replace("Transmission",'Automatic','AU') as "New_Transmission_Name" from cars;
 
+-- Substring function --
+
 select "Name","EMI",substring("Name" for 2) as "Name_Group" from cars where substring("Name" for 2) = 'Ro';
+
+-- String aggregate function --
 
 select "Fuel_Type",string_agg("Name",', ')from cars group by "Fuel_Type" order by "Fuel_Type";
 
