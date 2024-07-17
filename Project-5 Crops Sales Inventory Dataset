@@ -14,7 +14,7 @@ select * from customer where "City" In('Paris','Brussels');
 
 select * from customer where "Customer" between 1 and 5;
 
--- Total number of customers where serial number is not between 1 to 5--
+-- Total number of customers where serial number is not between 1 to 5 --
 
 select * from customer where "Customer" not between 1 and 5;
 
@@ -147,8 +147,12 @@ select "Customer","Unit Price",(select "Customer" from customer where sales."Cus
 select "Customer Name", length("Customer Name") as characters from customer;
 select "City"||', '||"Country" as address from customer;
 
+-- Substring function --
+
 select "Customer","Customer Name",substring("Customer Name" for 1) as "Customer Group" from customer
 where substring("Customer Name" for 1)='A';
+
+-- String aggregate function --
 
 select "Customer",string_agg("Total Amount"', ') from sales group by "Customer" order by "Customer";
 
