@@ -2,44 +2,116 @@ select * from bank;
 
 copy public."bank" from 'C:\download\course softwares\DATASETS\Bank Customers.csv' delimiter ',' csv header;
 
+-- Total number of customers in Scotland and Wales region --
+
 select * from bank where "Region" in ('Scotland','Wales');
+
+-- Total number of customers from age 20 to 40  --
+
 select * from bank where "Age" between 20 and 40;
+
+-- Total number of customers where age is not between 20 to 40 --
+
 select * from bank where "Age" not between 20 and 40;
 
+-- Total number of customers whose first name starts with We --
+
 select * from bank where "First Name" like 'We%';
-select * from bank where "Last Name" like '%rr%';
+
+-- Total number of customers whose first name contain only 4 characters --
+
 select * from bank where "First Name" like '____%';
 
+-- Total number of customers from male gender order by customer ID --
+
 select * from bank where "Gender"='Male' order by "Customer ID";
+
+-- Total number of customers from male gender order by customer ID in descending order --
+
 select * from bank where "Gender"='Male' order by "Customer ID" desc;
+
+-- Total number of customers order by first name in ascending order and last name in descending order --
+
 select * from bank order by "First Name" asc , "Last Name" desc;
 
+-- Total number of customers order by column name 2 in ascending order --
+
 select * from bank order by 2 asc;
+
+-- Total number of customers order by age in descending order --
+
 select * from bank order by "Age" desc;
+
+-- Top 10 customers whose balance is greater than 20000 in descending order --
+
 select * from bank where "Balance">20000 order by "Balance" desc limit 10;
+
+-- Top 20 customers whose balance is greater than 20000 in ascending order --
+
 select * from bank where "Balance">20000 order by "Balance" asc limit 20;
 
+-- Renaming the column using AS keyword --
+
 select "Customer ID" as "C_ID", "First Name" as "Customer Name", "Job Classification" as "Job Type" from bank;
+
+-- Total count of games --
+
 select count(*) from bank;
+
+-- Total number of customers across total number of regions of a particular region --
+
 select count("First Name") as "No of Customers",count("Region") as "No of Regions" from bank where "Region"='England';
 
+-- Total balance of customer where job classification is white collar --
+
 select sum("Balance") as "Total Balance" from bank where "Job Classification"='White Collar';
+
+-- Average balance of customer where job classification is white collar --
+
 select avg("Balance") as "Avg Balance" from bank where "Job Classification"='White Collar';
+
+-- Minimum balance of customer where age is between 20 to 50 --
+
 select min("Balance") as "Min Balance" from bank where "Age" between 20 and 50;
+
+-- Maximum balance of customer where age is not between 20 to 50 --
+
 select max("Balance") as "Max Balance" from bank where "Age" between 20 and 50;
 
 select * from bank;
+
+-- Total number of customers group by customer ID --
+
 select "Customer ID",count("First Name") as "No of Customers" from bank group by "Customer ID";
+
+-- Total balance group by region order by total balance in descending order --
+
 select "Region",sum("Balance") as "Total Balance" from bank group by "Region" order by "Total Balance" desc;
+
+-- Minimum balance, maximum balance and total balance group by job classification order by total balance --
 
 select "Job Classification",min("Balance") as "Min Balance",max("Balance") as "Max Balance",sum("Balance") as "Total Balance"
 from bank group by "Job Classification" order by "Total Balance";
+
+-- Total number of customers group by job classification having count of customers greater than 20 --
+
 select "Job Classification",count("First Name") as "No of Customers" from bank group by "Job Classification" having count("First Name")>20;
+
+-- Categorizing the customers by balance --
 
 select *, case when "Balance"<50000 then 'Low Balance Account' when "Balance" between 50000 and 100000 then 'Mid Balance Account' 
 else 'High Balance Account' end as "Balance Category" from bank;
+
+-- Renaming the customer gender --
+
 select "First Name","Gender",replace("Gender",'Male','M')as "New Gender Category" from bank;
+
+-- Substring function  --
+
 select "First Name","Customer ID",substring("First Name" for 2 ) as "Name Category" from bank where substring("First Name" for 2 ) = 'Ka';
+
+-- String aggregate function --
+
 select "First Name",string_agg("Last Name",' ') from bank group by "First Name" order by "First Name";
 
 explain select distinct * from bank;
