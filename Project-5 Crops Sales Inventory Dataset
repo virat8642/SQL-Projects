@@ -102,7 +102,7 @@ select "Country Code",count("Customer") as "Customer_Count" from customer group 
 
 select "Product",sum("Quantity") as "Quantity_Sold" from sales group by "Product" order by "Quantity_Sold" desc;
 
--- Minimum amount, Maximium amount and Total amount group by customer order by total amount from sales table --
+-- Minimum amount, maximium amount and total amount group by customer order by total amount from sales table --
 
 select "Customer",min("Total Amount") as "Min_Amount",max("Total Amount") as "Max_Amount",sum("Total Amount") as "Total_Amount" from sales
 group by "Customer" order by "Total_Amount";
