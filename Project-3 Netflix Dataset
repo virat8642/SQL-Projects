@@ -2,7 +2,7 @@ select * from netflix;
 
 copy public."netflix" from 'C:\download\course softwares\DATASETS\Netflix.csv' delimiter ',' csv header encoding 'windows-1251';
 
--- Total number of titles in Documentaries and Thrillers Genre --
+-- Total number of titles in Documentaries and Thrillers genre --
 
 select * from netflix where "Genres" in('Documentaries','Thrillers');
 
@@ -34,7 +34,7 @@ select * from netflix where "Series" = 'PG-13' order by "S.No";
 
 select * from netflix where "Series" = 'PG-13' order by "S.No" desc;
 
--- Total number of titles order by Genre in ascending order and Title in descending order --
+-- Total number of titles order by genre in ascending order and title in descending order --
 
 select * from netflix order by "Genres" asc , "Title" desc;
 
@@ -66,19 +66,19 @@ select count(*)from netflix;
 
 select count("Title") as "No_of_Titles",count(distinct "Series") as "N0_of_Series" from netflix where "Title"='Delhi Crime';
 
--- Total Ratings of series 'TV-MA' --
+-- Total ratings of series 'TV-MA' --
 
 select sum("Rating") as "Total_Ratings" from netflix where "Series"='TV-MA';
 
--- Average Ratings of series 'R' --
+-- Average ratings of series 'R' --
 
 select avg("Rating") as "Average_Ratings" from netflix where "Series"='R';
 
--- Minimum Ratings of titles from year 2000 to 2010 --
+-- Minimum ratings of titles from year 2000 to 2010 --
 
 select min("Rating") as "Min_Ratings" from netflix where "Year" between '2000' and '2010';
 
--- Maximum Ratings of titles from year 2000 to 2010 --
+-- Maximum ratings of titles from year 2000 to 2010 --
 
 select max("Rating") as "Max_Ratings" from netflix where "Year" between '2000' and '2010';
 
@@ -88,25 +88,25 @@ select * from netflix;
 
 select "Director",count("S.No") as "No_of_Titles" from netflix group by "Director";
 
--- Total Ratings group by year order by Total Ratings in descending order --
+-- Total ratings group by year order by total ratings in descending order --
 
 select "Year",sum("Rating") as "Total_Ratings" from netflix group by "Year" order by "Total_Ratings" desc;
 
--- Minimum Ratings, Maximum Ratings and Total Ratings group by Genres --
+-- Minimum ratings, maximum ratings and total ratings group by genres --
 
 select "Genres",min("Rating") as "Min_Ratings", max("Rating") as "Max_Ratings", sum("Rating") as "Total_Ratings" 
 from netflix group by "Genres" order by "Total_Ratings";
 
--- Total number of titles group by Genre having rank greater than 100 --
+-- Total number of titles group by genre having rank greater than 100 --
 
 select "Genres",count("S.No") as "Title_count" from netflix group by "Genres" having count("S.No")>100;
 
--- Categorizing the titles by Time Duration --
+-- Categorizing the titles by time duration --
 
 select * ,case when ("Duration(in Minutes)")<180 then '2 Hr Movie' when ("Duration(in Minutes)") between 180 and 240 then '3 Hr Movie'
 else 'Seasons' end as "Title_Duration" from netflix;
 
--- Renaming the Production Country --
+-- Renaming the production country --
 
 select "Title","Production Country", replace("Production Country",'Australia','AUS') as "New_Production_Country" from netflix;
 
