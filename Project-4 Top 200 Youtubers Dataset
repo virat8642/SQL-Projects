@@ -74,11 +74,11 @@ select sum("Likes") as "Total_Likes" from "Youtubers" where "Category"='Sports';
 
 select avg("Likes") as "Average_Likes" from "Youtubers" where "Category"='Sports';
 
--- Minimum likes of youtube channels where Views between 10000000000 and 20000000000 --
+-- Minimum likes of youtube channels where views between 10000000000 and 20000000000 --
 
 select min("Likes") as "Min_Likes" from "Youtubers" where "Views" between 10000000000 and 20000000000;
 
--- Maximum likes of youtube channels where Views between 10000000000 and 20000000000 --
+-- Maximum likes of youtube channels where views between 10000000000 and 20000000000 --
 
 select max("Likes") as "Max_Likes" from "Youtubers" where "Views" between 10000000000 and 20000000000;
 
@@ -88,11 +88,11 @@ select * from "Youtubers";
 
 select "Username",  count("Channel Name") as "No_of_Channels" from "Youtubers" group by "Username";
 
--- Total likes of youtube channels group by country order by Total likes in descending order --
+-- Total likes of youtube channels group by country order by total likes in descending order --
 
 select "Country",sum("Likes")as "Total_Likes" from "Youtubers" group by "Country" order by "Total_Likes" desc;
 
--- Minimum likes, Maximum likes and Total likes of youtube channels group by category --
+-- Minimum likes, maximum likes and total likes of youtube channels group by category --
 
 select "Category",min("Likes")as "Min_Likes",max("Likes")as "Max_Likes",sum("Likes") as "Total_Likes"
 from "Youtubers" group by "Category" order by "Total_Likes";
@@ -115,6 +115,7 @@ select "Channel Name","Country", replace("Country",'US','United States') as "New
 select "Category","Channel Name",substring("Category" for 2 ) as "Category_group" from "Youtubers" where substring("Category" for 2 )='Ga';
 
 -- String aggregate function --
+
 select "Category",string_agg("Username",' ,') from "Youtubers"  group by "Category" order by "Category";
 
 explain select * from "Youtubers";
