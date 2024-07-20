@@ -74,11 +74,11 @@ select count(*) from batsman;
 
 select count("4s") as "No_of_4s",count("6s") as "No_of_6s" from batsman where "Player_ID"='24598';
 
--- Total 6s from batsman table --
+-- Total number of 6s from batsman table --
 
 select sum("6s") as "Total_6s" from batsman;
 
--- Total 4s from batsman table for a particular bastman --
+-- Total number of 4s from batsman table for a particular bastman --
 
 select sum("4s") as "Total_4s" from batsman where "Batsman" = 'Jason Roy';
 
@@ -106,7 +106,7 @@ select "Country",count("Match_ID") as "No_of_Matches" from "ODI_Results" group b
 
 select "City",count("Match_ID") as "Total Matches" from "ODI_Results" group by "City" order by "Total Matches" desc;
 
--- Maximum 4s, 6s and Total 4s, 6s group by player ID order by total 6s from bastman table --
+-- Maximum 4s, 6s and total 4s, 6s group by player ID order by total 6s from bastman table --
 
 select "Player_ID",max("4s") as "Max_4s",max("6s") as "Max_6s",sum("4s") as "Total_4s",sum("6s") as "Total_6s" 
 from batsman group by "Player_ID" order by "Total_6s";
@@ -115,7 +115,7 @@ from batsman group by "Player_ID" order by "Total_6s";
 
 select "Country",count("Match_ID") as "No_of_Matches" from "ODI_Results" group by "Country" having count("Match_ID")>200;
 
--- Total bastman according to number of 6s and classifying them in sixes category from bastman table --
+-- Classifying the bastman in sixes category from bastman table --
 
 select * , case when "6s"< 5 then 'Low Sixes' when "6s" between 5 and 10 then 'Medium Sixes' else 'High Sixes' 
 end as "Sixes Category" from batsman;
