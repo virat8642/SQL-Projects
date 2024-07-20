@@ -54,7 +54,7 @@ select * from games where "Year">'2010' order by "Year" desc limit 10;
 
 select * from games where "Year">'2010' order by "Year" asc limit 20;
 
---Renaming the column using AS keyword --
+-- Renaming the column using AS keyword --
 
 select "Rank" as "Rank_no", "Name" as "Game_name" ,"Year" as "Release_Year" from games;
 
