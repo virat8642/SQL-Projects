@@ -100,7 +100,7 @@ select region,count(customer_id) as customer_count from customer group by region
 
 select product_id,sum(quantity) as quantity_sold from sales group by product_id order by quantity_sold desc;
 
--- Minimum sales, Maximium sales and Total sales group by customer ID order by total sales from sales table --
+-- Minimum sales, maximium sales and total sales group by customer ID order by total sales from sales table --
 
 select customer_id, min(sales) as min_sales,max(sales) as max_sales,sum(sales) as total_sales from sales group by customer_id order by total_sales;
 
@@ -108,7 +108,7 @@ select customer_id, min(sales) as min_sales,max(sales) as max_sales,sum(sales) a
 
 select region,count(customer_id) as customer_count from customer group by region having count(customer_id)>200;
 
--- Total customers according to age and classifying them in age category from customer table --
+-- Classifying the cusotmers in age category from customer table --
 
 select * , case when age<30 then 'young' when age>60 then'senior' else 'middle aged'
 end as age_category from customer;
