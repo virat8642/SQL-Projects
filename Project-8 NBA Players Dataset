@@ -92,7 +92,7 @@ select "Country",count("Team") as "No_of_Teams" from "NBA Players" group by "Cou
 
 select "Team",sum("Draft Peak") as "Total Draft Peak" from "NBA Players" group by "Team" order by "Total Draft Peak";
 
--- Minimum draft peak, Maximum draft peak and total draft peak from NBA players group by team order by total draft peak --
+-- Minimum draft peak, maximum draft peak and total draft peak from NBA players group by team order by total draft peak --
 
 select "Team",min("Draft Peak") as "Min Draft Peak",max("Draft Peak") as "Max Draft Peak",sum("Draft Peak") as "Total Draft Peak"
 from "NBA Players" group by "Team" order by "Total Draft Peak";
